@@ -282,6 +282,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.zacharywilliams.BlackHorizon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -296,6 +297,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = me.zacharywilliams.BlackHorizon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -318,6 +320,7 @@
 				928A7A261EF76D0100D627A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
