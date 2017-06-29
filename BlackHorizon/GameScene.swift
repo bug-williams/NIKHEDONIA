@@ -16,6 +16,16 @@ class GameScene: SKScene {
     private var spinnyNode : SKShapeNode?
     
     
+    
+    override func didMove(to view: SKView) {
+        
+        // Called right before the scene is presented, used here to set up the scene's contents.
+        
+        backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1) // Black background.
+        
+    }
+    
+    
     override func sceneDidLoad() {
         
         self.lastUpdateTime = 0
@@ -45,8 +55,6 @@ class GameScene: SKScene {
         self.lastUpdateTime = currentTime
         
     }
-    
-    
     
     
 }
