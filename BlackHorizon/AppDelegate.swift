@@ -1,14 +1,3 @@
-//
-//  AppDelegate.swift
-//  BlackHorizon
-//
-//  Created by Zachary Williams on 6/18/17.
-//  Copyright © 2017 Zachary Williams. All rights reserved.
-//
-
-
-
-
 import UIKit
 
 
@@ -67,4 +56,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-

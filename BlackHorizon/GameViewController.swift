@@ -1,14 +1,3 @@
-//
-//  GameViewController.swift
-//  BlackHorizon
-//
-//  Created by Zachary Williams on 6/18/17.
-//  Copyright © 2017 Zachary Williams. All rights reserved.
-//
-
-
-
-
 import UIKit
 import SpriteKit
 import GameplayKit
@@ -26,17 +15,17 @@ class GameViewController: UIViewController {
         // Load 'GameScene.sks' as a GKScene. This provides gameplay related content, including enditites and graphs.
         if let scene = GKScene(fileNamed: "GameScene") {
             
-            // Get the SKScene from the loaded GKScene
+            // Get the SKScene (SpriteKit scene) from the loaded GKScene (GameKit scene).
             if let sceneNode = scene.rootNode as! GameScene? {
                 
-                // Copy gameplay related content over to the scene
+                // Copy gameplay related content over to the scene.
                 sceneNode.entities = scene.entities
                 sceneNode.graphs = scene.graphs
                 
-                // Set the scale mode to scale to fit the window
+                // Set the scale mode to scale to fit the window.
                 sceneNode.scaleMode = .aspectFill
                 
-                // Present the scene
+                // Present the scene.
                 if let view = self.view as! SKView? {
                     
                     view.presentScene(sceneNode)
