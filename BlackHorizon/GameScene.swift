@@ -21,7 +21,7 @@ class GameScene: SKScene {
         
         // Called right before the scene is presented, used here to set up the scene's contents.
         
-        backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1) // Black background.
+        backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1) // Create black background.
         
     }
     
