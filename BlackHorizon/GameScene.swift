@@ -28,6 +28,8 @@ class GameScene: SKScene {
     
     override func sceneDidLoad() {
         
+        // Called immidiately after the scene is loaded into view.
+        
         self.lastUpdateTime = 0
         
     }
