@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		925276771F059CD000E0A431 /* Tiles.sks in Resources */ = {isa = PBXBuildFile; fileRef = 925276761F059CD000E0A431 /* Tiles.sks */; };
+		924AF2F01F09AB0800BCF80F /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 924AF2EF1F09AB0300BCF80F /* SF-Pro-Display-Black.otf */; };
 		928A7A101EF76D0000D627A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A7A0F1EF76D0000D627A5 /* AppDelegate.swift */; };
 		928A7A121EF76D0100D627A5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 928A7A111EF76D0100D627A5 /* GameScene.sks */; };
 		928A7A141EF76D0100D627A5 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 928A7A131EF76D0100D627A5 /* Actions.sks */; };
@@ -19,7 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		925276761F059CD000E0A431 /* Tiles.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Tiles.sks; sourceTree = "<group>"; };
+		924AF2EF1F09AB0300BCF80F /* SF-Pro-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Black.otf"; sourceTree = "<group>"; };
 		928A7A0C1EF76D0000D627A5 /* BlackHorizon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackHorizon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		928A7A0F1EF76D0000D627A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		928A7A111EF76D0100D627A5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -43,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		924AF2EC1F09A6E600BCF80F /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				924AF2EF1F09AB0300BCF80F /* SF-Pro-Display-Black.otf */,
+			);
+			name = Fonts;
+			sourceTree = "<group>";
+		};
 		928A7A031EF76CFF00D627A5 = {
 			isa = PBXGroup;
 			children = (
@@ -69,7 +77,7 @@
 				928A7A171EF76D0100D627A5 /* GameViewController.swift */,
 				928A7A191EF76D0100D627A5 /* Main.storyboard */,
 				928A7A1C1EF76D0100D627A5 /* Assets.xcassets */,
-				925276761F059CD000E0A431 /* Tiles.sks */,
+				924AF2EC1F09A6E600BCF80F /* Fonts */,
 				928A7A1E1EF76D0100D627A5 /* LaunchScreen.storyboard */,
 				928A7A211EF76D0100D627A5 /* Info.plist */,
 			);
@@ -139,9 +147,9 @@
 				928A7A1B1EF76D0100D627A5 /* Main.storyboard in Resources */,
 				928A7A121EF76D0100D627A5 /* GameScene.sks in Resources */,
 				928A7A1D1EF76D0100D627A5 /* Assets.xcassets in Resources */,
-				925276771F059CD000E0A431 /* Tiles.sks in Resources */,
 				928A7A201EF76D0100D627A5 /* LaunchScreen.storyboard in Resources */,
 				928A7A141EF76D0100D627A5 /* Actions.sks in Resources */,
+				924AF2F01F09AB0800BCF80F /* SF-Pro-Display-Black.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
