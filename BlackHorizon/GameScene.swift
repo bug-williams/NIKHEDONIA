@@ -16,6 +16,8 @@ class GameScene: SKScene {
     private var spinnyNode : SKShapeNode?
     
     
+    var landBackgroundTiles:SKTileMapNode! // Land background tile node.
+    
     
     override func didMove(to view: SKView) {
         
@@ -55,6 +57,13 @@ class GameScene: SKScene {
         }
         
         self.lastUpdateTime = currentTime
+        
+    }
+    
+    
+    func setTileGroup(_ tileGroup: SKTileGroup, andTileDefinition tileDefinition: SKTileDefinition, forColumn column: Int, row: Int) {
+        
+        
         
     }
     
