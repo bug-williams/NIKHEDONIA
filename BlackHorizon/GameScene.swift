@@ -37,8 +37,8 @@ class GameScene: SKScene {
     func initTiles() {
         
         // Initiate tiles and add them to the tiles array.
-        for index in 0...80 {
-            var tile = SKSpriteNode()
+        for _ in 0...80 {
+            let tile = SKSpriteNode()
             tiles.append(tile)
         }
         
