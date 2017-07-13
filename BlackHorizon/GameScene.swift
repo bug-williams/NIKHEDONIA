@@ -10,7 +10,8 @@ class GameScene: SKScene {
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     
-    var tileArray:[SKSpriteNode] = []
+    
+    var tiles:[SKSpriteNode] = []
     
     
     override func didMove(to view: SKView) {
@@ -29,17 +30,21 @@ class GameScene: SKScene {
     }
     
     
-    // UTILITY FUNCTIONS
-    
-    
     func initTiles() {
         
-        var i = 0;
-        while(i < 81) {
+        // Initiate tiles and add them to the tiles array.
+        for index in 0...80 {
             var tile = SKSpriteNode()
-            tile = self.childNode(withName: "tile + \(i)") as! SKSpriteNode
-            self.tileArray.append(tile)
-            i += 1
+            tiles.append(tile)
+        }
+        
+        // Set each tile as a child node of self, with procedurally generated name.
+        for index in 0...80 {
+            if index < 10 {
+                tiles[index] = self.childNode(withName: "tile0\(index)") as! SKSpriteNode
+            } else {
+                tiles[index] = self.childNode(withName: "tile\(index)") as! SKSpriteNode
+            }
         }
         
     }
