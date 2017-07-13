@@ -11,7 +11,7 @@ class GameScene: SKScene {
     var graphs = [String : GKGraph]()
     
     
-    var tiles:[SKSpriteNode] = []
+    var tiles:[SKSpriteNode] = [] // Array containing all tiles in the board/grid.
     
     
     override func didMove(to view: SKView) {
@@ -20,7 +20,9 @@ class GameScene: SKScene {
         
         initTiles()
         
-        tiles[17].texture = SKTexture(imageNamed:"tile-building-blue") // Adds a building for art testing.
+        // Add test tiles:
+        generatePetrolium(amountToGenerate:5) // Test resource tiles.
+        tiles[17].texture = SKTexture(imageNamed:"tile-building-blue") // Test building.
         
     }
     
@@ -47,6 +49,18 @@ class GameScene: SKScene {
             } else {
                 tiles[index] = self.childNode(withName: "tile\(index)") as! SKSpriteNode
             }
+        }
+        
+    }
+    
+    
+    func generatePetrolium(amountToGenerate: Int) {
+        
+        // For testing, in the real game the placement of all resource tiles needs to be symmetrical.
+        
+        for _ in 0...amountToGenerate {
+            let index = Int(arc4random_uniform(81))
+            tiles[index].texture = SKTexture(imageNamed:"tile-petrolium")
         }
         
     }
