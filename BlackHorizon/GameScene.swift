@@ -20,6 +20,8 @@ class GameScene: SKScene {
         
         initTiles()
         
+        tiles[17].texture = SKTexture(imageNamed:"tile-building-blue") // Adds a building for art testing.
+        
     }
     
     
