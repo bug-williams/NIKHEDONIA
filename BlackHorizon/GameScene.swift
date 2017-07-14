@@ -57,7 +57,6 @@ class GameScene: SKScene {
                     builderButtonPressed = false
                 }
                 if name == "player1BuilderButton" {
-                    print("builder button pressed!")
                     if builderButtonPressed == true {
                         builderButtonPressed = false
                     }
