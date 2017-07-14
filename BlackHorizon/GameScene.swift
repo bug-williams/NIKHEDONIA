@@ -11,9 +11,11 @@ class GameScene: SKScene {
     var graphs = [String : GKGraph]()
     
     
+    var tiles:[SKSpriteNode] = [] // Array containing all tiles in the board/grid.
+    
+    
     var player1BuilderButton = SKSpriteNode()
     var player1CollectorButton = SKSpriteNode()
-    var tiles:[SKSpriteNode] = [] // Array containing all tiles in the board/grid.
     
     
     // Booleans that check which type of unit is going to be placed on a tile when you tap a tile.
@@ -55,13 +57,16 @@ class GameScene: SKScene {
                     let tileNum = Int(name.substring(from: nameEndIndex))
                     tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-blue")
                     builderButtonPressed = false
+                    player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
                 }
                 if name == "player1BuilderButton" {
-                    if builderButtonPressed == true {
+                    if builderButtonPressed {
                         builderButtonPressed = false
+                        player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
                     }
                     else {
                         builderButtonPressed = true
+                        player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-pressed")
                     }
                 }
             }
