@@ -10,17 +10,13 @@ class GameScene: SKScene {
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     
-    
     var tiles:[SKSpriteNode] = [] // Array containing all tiles in the board/grid.
-    
-    
     var player1BuilderButton = SKSpriteNode()
-    var player1CollectorButton = SKSpriteNode()
-    
+    var player1FighterButton = SKSpriteNode()
     
     // Booleans that check which type of unit is going to be placed on a tile when you tap a tile.
     var builderButtonPressed = false;
-    var collectorButtonPressed = false;
+    var fighterButtonPressed = false;
     
     
     override func didMove(to view: SKView) {
@@ -50,7 +46,7 @@ class GameScene: SKScene {
             let positionInScene = touch.location(in: self)
             let touchedNode = self.atPoint(positionInScene)
             if let name = touchedNode.name {
-                // This code gets the number at the end of the tile name, converts it to an Integer, and uses it to access the tile sprite in the tiles array.
+                // Tile interaction.
                 let nameStartIndex = name.index(name.endIndex, offsetBy: -2)
                 if builderButtonPressed == true && name.substring(to: nameStartIndex) == "tile" {
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
@@ -59,6 +55,7 @@ class GameScene: SKScene {
                     builderButtonPressed = false
                     player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
                 }
+                // Player 1 builder button.
                 if name == "player1BuilderButton" {
                     if builderButtonPressed {
                         builderButtonPressed = false
@@ -67,6 +64,17 @@ class GameScene: SKScene {
                     else {
                         builderButtonPressed = true
                         player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-pressed")
+                    }
+                }
+                // Player 1 fighter button.
+                if name == "player1FighterButton" {
+                    if fighterButtonPressed {
+                        fighterButtonPressed = false
+                        player1FighterButton.texture = SKTexture(imageNamed: "button-fighter-blue")
+                    }
+                    else {
+                        fighterButtonPressed = true
+                        player1FighterButton.texture = SKTexture(imageNamed: "button-fighter-pressed")
                     }
                 }
             }
@@ -98,7 +106,7 @@ class GameScene: SKScene {
     func initButtons() {
         
         player1BuilderButton = self.childNode(withName: "player1BuilderButton") as! SKSpriteNode
-        player1CollectorButton = self.childNode(withName: "player1CollectorButton") as! SKSpriteNode
+        player1FighterButton = self.childNode(withName: "player1FighterButton") as! SKSpriteNode
         
     }
     
