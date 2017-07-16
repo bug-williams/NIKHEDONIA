@@ -61,8 +61,7 @@ class GameScene: SKScene {
                     builderButtonPressed = false
                     player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
                     animateButtonPress(buttonSprite: player1BuilderButton, isReversed: true)
-                    animateTilePlacement(tile: tiles[tileNum!], isReversed: false) // THESE TWO ARE CANCELLING EACH OTHER OUT?
-//                    animateTilePlacement(tile: tiles[tileNum!], isReversed: true)  // THESE TWO ARE CANCELLING EACH OTHER OUT?
+                    animateTilePlacement(tile: tiles[tileNum!], isReversed: false)
                 }
                 // Player 1 builder button.
                 if name == "player1BuilderButton" {
@@ -149,19 +148,14 @@ class GameScene: SKScene {
     
     func animateTilePlacement(tile: SKSpriteNode, isReversed: Bool) {
         
-        let tileScale = SKAction.scale(to: 1.1, duration: 0.1)
-        let tileRotate = SKAction.rotate(byAngle: -0.5, duration: 0.1)
+        let tileScale = SKAction.scale(to: 1.2, duration: 0.1)
         let inverseTileScale = SKAction.scale(to: 1.0, duration: 0.1)
-        let inverseTileRotate = SKAction.rotate(byAngle: 0.5, duration: 0.1)
-        
-        let tilePlacedAction = SKAction.group([tileScale, tileRotate])
-        let inverseTilePlacedAction = SKAction.group([inverseTileScale, inverseTileRotate])
         
         if isReversed {
-            tile.run(inverseTilePlacedAction)
+            tile.run(inverseTileScale)
         }
         else {
-            tile.run(tilePlacedAction, completion: {
+            tile.run(tileScale, completion: {
                 self.animateTilePlacement(tile: tile, isReversed: true)
             })
         }
