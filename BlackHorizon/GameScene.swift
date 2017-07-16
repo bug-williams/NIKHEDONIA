@@ -61,6 +61,8 @@ class GameScene: SKScene {
                     builderButtonPressed = false
                     player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
                     animateButtonPress(buttonSprite: player1BuilderButton, isReversed: true)
+                    animateTilePlacement(tile: tiles[tileNum!], isReversed: false) // THESE TWO ARE CANCELLING EACH OTHER OUT?
+//                    animateTilePlacement(tile: tiles[tileNum!], isReversed: true)  // THESE TWO ARE CANCELLING EACH OTHER OUT?
                 }
                 // Player 1 builder button.
                 if name == "player1BuilderButton" {
@@ -122,11 +124,13 @@ class GameScene: SKScene {
     }
     
     
+    // SPRITE ANIMATIONS (SKACTIONS)
+    
+    
     func animateButtonPress(buttonSprite: SKSpriteNode, isReversed: Bool) {
         
         let buttonScale = SKAction.scale(to: 0.9, duration: 0.1)
         let buttonRotate = SKAction.rotate(byAngle: 0.5, duration: 0.1)
-        
         let inverseButtonScale = SKAction.scale(to: 1.0, duration: 0.1)
         let inverseButtonRotate = SKAction.rotate(byAngle: -0.5, duration: 0.1)
         
@@ -141,6 +145,31 @@ class GameScene: SKScene {
         }
         
     }
+    
+    
+    func animateTilePlacement(tile: SKSpriteNode, isReversed: Bool) {
+        
+        let tileScale = SKAction.scale(to: 1.1, duration: 0.1)
+        let tileRotate = SKAction.rotate(byAngle: -0.5, duration: 0.1)
+        let inverseTileScale = SKAction.scale(to: 1.0, duration: 0.1)
+        let inverseTileRotate = SKAction.rotate(byAngle: 0.5, duration: 0.1)
+        
+        let tilePlacedAction = SKAction.group([tileScale, tileRotate])
+        let inverseTilePlacedAction = SKAction.group([inverseTileScale, inverseTileRotate])
+        
+        if isReversed {
+            tile.run(inverseTilePlacedAction)
+        }
+        else {
+            tile.run(tilePlacedAction, completion: {
+                self.animateTilePlacement(tile: tile, isReversed: true)
+            })
+        }
+        
+    }
+    
+    
+    // TEST FUNCTIONS
     
     
     func generatePetrolium(amountToGenerate: Int) {
