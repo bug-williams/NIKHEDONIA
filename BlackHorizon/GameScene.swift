@@ -14,12 +14,14 @@ class GameScene: SKScene {
     var graphs = [String : GKGraph]()
     
     var tiles:[SKSpriteNode] = [] // Array containing all tiles in the board/grid.
+    
+    // Player conrol buttons.
     var player1BuilderButton = SKSpriteNode()
     var player1FighterButton = SKSpriteNode()
     var player2BuilderButton = SKSpriteNode()
     var player2FighterButton = SKSpriteNode()
     
-    // Booleans that check which type of unit is going to be placed on a tile when you tap a tile.
+    // Booleans telling tiles which button has been pressed.
     var builderButton1Pressed = false
     var builderButton2Pressed = false
     var fighterButton1Pressed = false
