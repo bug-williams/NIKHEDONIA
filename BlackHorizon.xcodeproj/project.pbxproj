@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9236C5ED1F2547C900CDF74B /* SKSpriteNode+TextureToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9236C5EC1F2547C900CDF74B /* SKSpriteNode+TextureToString.swift */; };
 		924AF2F01F09AB0800BCF80F /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 924AF2EF1F09AB0300BCF80F /* SF-Pro-Display-Black.otf */; };
 		928A7A101EF76D0000D627A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A7A0F1EF76D0000D627A5 /* AppDelegate.swift */; };
 		928A7A121EF76D0100D627A5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 928A7A111EF76D0100D627A5 /* GameScene.sks */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9236C5EC1F2547C900CDF74B /* SKSpriteNode+TextureToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKSpriteNode+TextureToString.swift"; sourceTree = "<group>"; };
 		924AF2EF1F09AB0300BCF80F /* SF-Pro-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Black.otf"; sourceTree = "<group>"; };
 		928A7A0C1EF76D0000D627A5 /* BlackHorizon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackHorizon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		928A7A0F1EF76D0000D627A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9236C5EE1F2547E300CDF74B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9236C5EC1F2547C900CDF74B /* SKSpriteNode+TextureToString.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 		924AF2EC1F09A6E600BCF80F /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +87,7 @@
 				928A7A171EF76D0100D627A5 /* GameViewController.swift */,
 				928A7A191EF76D0100D627A5 /* Main.storyboard */,
 				928A7A1C1EF76D0100D627A5 /* Assets.xcassets */,
+				9236C5EE1F2547E300CDF74B /* Extensions */,
 				924AF2EC1F09A6E600BCF80F /* Fonts */,
 				928A7A1E1EF76D0100D627A5 /* LaunchScreen.storyboard */,
 				928A7A211EF76D0100D627A5 /* Info.plist */,
@@ -162,6 +173,7 @@
 			files = (
 				928A7A161EF76D0100D627A5 /* GameScene.swift in Sources */,
 				928A7A181EF76D0100D627A5 /* GameViewController.swift in Sources */,
+				9236C5ED1F2547C900CDF74B /* SKSpriteNode+TextureToString.swift in Sources */,
 				928A7A101EF76D0000D627A5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

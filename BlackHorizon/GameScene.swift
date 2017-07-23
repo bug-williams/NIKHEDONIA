@@ -63,11 +63,13 @@ class GameScene: SKScene {
                 if builderButton1Pressed == true && name.substring(to: nameStartIndex) == "tile" {
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
                     let tileNum = Int(name.substring(from: nameEndIndex))
-                    tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-blue")
-                    builderButton1Pressed = false
-                    player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
-                    animateButtonPress(buttonSprite: player1BuilderButton, isReversed: true)
-                    animateTilePlacement(tile: tiles[tileNum!], isReversed: false)
+                    if tileSurrounded(tileNumber: tileNum!) == false {
+                        tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-blue")
+                        builderButton1Pressed = false
+                        player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
+                        animateButtonPress(buttonSprite: player1BuilderButton, isReversed: true)
+                        animateTilePlacement(tile: tiles[tileNum!], isReversed: false)
+                    }
                 }
                 // Orange tile interaction.
                 if builderButton2Pressed == true && name.substring(to: nameStartIndex) == "tile" {
@@ -203,6 +205,43 @@ class GameScene: SKScene {
             tile.run(tileScale, completion: {
                 self.animateTilePlacement(tile: tile, isReversed: true)
             })
+        }
+        
+    }
+    
+    
+    // TILE MANAGEMENT FUNCTIONS
+    
+    
+    func tileSurrounded(tileNumber: Int) -> Bool {
+        
+        var upIsCovered = false
+        var downIsCovered = false
+        var leftIsCovered = false
+        var rightIsCovered = false
+        
+        // Check if tile above is covered.
+        if tiles[tileNumber - 9].texture!.name == "tile-building-blue" || tiles[tileNumber - 9].texture!.name == "tile-building-orange" {
+            upIsCovered = true
+        }
+        // Check if tile below is covered.
+        if tiles[tileNumber + 9].texture!.name == "tile-building-blue" || tiles[tileNumber + 9].texture!.name == "tile-building-orange" {
+            downIsCovered = true
+        }
+        // Check if tile left is covered.
+        if tiles[tileNumber - 1].texture!.name == "tile-building-blue" || tiles[tileNumber - 1].texture!.name == "tile-building-orange" {
+            leftIsCovered = true
+        }
+        // Check if tile right is covered.
+        if tiles[tileNumber + 1].texture!.name == "tile-building-blue" || tiles[tileNumber + 1].texture!.name == "tile-building-orange" {
+            rightIsCovered = true
+        }
+        
+        if upIsCovered && downIsCovered && leftIsCovered && rightIsCovered {
+            return true
+        }
+        else {
+            return false
         }
         
     }
