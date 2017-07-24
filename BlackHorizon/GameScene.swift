@@ -38,10 +38,6 @@ class GameScene: SKScene {
         initTiles()
         initButtons()
         
-        // Add test tiles:
-        generatePetrolium(amountToGenerate:5) // Test resource tiles.
-        tiles[47].texture = SKTexture(imageNamed:"tile-building-blue") // Test building.
-        
     }
     
     
@@ -63,7 +59,7 @@ class GameScene: SKScene {
                 if builderButton1Pressed == true && name.substring(to: nameStartIndex) == "tile" {
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
                     let tileNum = Int(name.substring(from: nameEndIndex))
-                    if tileSurrounded(tileNumber: tileNum!) == false {
+                    if tileSurrounded(tileNumber: tileNum!, tileColor: "orange") == false {
                         tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-blue")
                         builderButton1Pressed = false
                         player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
@@ -213,28 +209,49 @@ class GameScene: SKScene {
     // TILE MANAGEMENT FUNCTIONS
     
     
-    func tileSurrounded(tileNumber: Int) -> Bool {
+    func tileSurrounded(tileNumber: Int, tileColor: String) -> Bool {
         
         var upIsCovered = false
         var downIsCovered = false
         var leftIsCovered = false
         var rightIsCovered = false
         
-        // Check if tile above is covered.
-        if tiles[tileNumber - 9].texture!.name == "tile-building-blue" || tiles[tileNumber - 9].texture!.name == "tile-building-orange" {
-            upIsCovered = true
+        if tileColor == "blue" {
+            // Check if tile above is covered.
+            if tiles[tileNumber - 9].texture!.name == "tile-building-blue" {
+                upIsCovered = true
+            }
+            // Check if tile below is covered.
+            if tiles[tileNumber + 9].texture!.name == "tile-building-blue" {
+                downIsCovered = true
+            }
+            // Check if tile left is covered.
+            if tiles[tileNumber - 1].texture!.name == "tile-building-blue" {
+                leftIsCovered = true
+            }
+            // Check if tile right is covered.
+            if tiles[tileNumber + 1].texture!.name == "tile-building-blue" {
+                rightIsCovered = true
+            }
         }
-        // Check if tile below is covered.
-        if tiles[tileNumber + 9].texture!.name == "tile-building-blue" || tiles[tileNumber + 9].texture!.name == "tile-building-orange" {
-            downIsCovered = true
-        }
-        // Check if tile left is covered.
-        if tiles[tileNumber - 1].texture!.name == "tile-building-blue" || tiles[tileNumber - 1].texture!.name == "tile-building-orange" {
-            leftIsCovered = true
-        }
-        // Check if tile right is covered.
-        if tiles[tileNumber + 1].texture!.name == "tile-building-blue" || tiles[tileNumber + 1].texture!.name == "tile-building-orange" {
-            rightIsCovered = true
+        
+        if tileColor == "orange" {
+            // Check if tile above is covered.
+            if tiles[tileNumber - 9].texture!.name == "tile-building-orange" {
+                upIsCovered = true
+            }
+            // Check if tile below is covered.
+            if tiles[tileNumber + 9].texture!.name == "tile-building-orange" {
+                downIsCovered = true
+            }
+            // Check if tile left is covered.
+            if tiles[tileNumber - 1].texture!.name == "tile-building-orange" {
+                leftIsCovered = true
+            }
+            // Check if tile right is covered.
+            if tiles[tileNumber + 1].texture!.name == "tile-building-orange" {
+                rightIsCovered = true
+            }
         }
         
         if upIsCovered && downIsCovered && leftIsCovered && rightIsCovered {
@@ -242,21 +259,6 @@ class GameScene: SKScene {
         }
         else {
             return false
-        }
-        
-    }
-    
-    
-    // TEST FUNCTIONS
-    
-    
-    func generatePetrolium(amountToGenerate: Int) {
-        
-        // For testing, in the real game the placement of all resource tiles needs to be symmetrical.
-        
-        for _ in 0...amountToGenerate {
-            let index = Int(arc4random_uniform(81))
-            tiles[index].texture = SKTexture(imageNamed:"tile-petrolium")
         }
         
     }
