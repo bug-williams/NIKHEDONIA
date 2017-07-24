@@ -171,19 +171,22 @@ class GameScene: SKScene {
     
     func animateButtonPress(buttonSprite: SKSpriteNode, isReversed: Bool) {
         
-        let buttonScale = SKAction.scale(to: 0.9, duration: 0.1)
-        let buttonRotate = SKAction.rotate(byAngle: 0.5, duration: 0.1)
-        let inverseButtonScale = SKAction.scale(to: 1.0, duration: 0.1)
-        let inverseButtonRotate = SKAction.rotate(byAngle: -0.5, duration: 0.1)
+        let buttonScale1 = SKAction.scale(to: 0.6, duration: 0.1)
+        let buttonScale2 = SKAction.scale(to: 0.8, duration: 0.1)
         
-        let buttonPressAction = SKAction.group([buttonScale, buttonRotate])
-        let inverseButtonPressAction = SKAction.group([inverseButtonScale, inverseButtonRotate])
+        let inverseButtonScale1 = SKAction.scale(to: 1.2, duration: 0.1)
+        let inverseButtonScale2 = SKAction.scale(to: 1.0, duration: 0.1)
+        
+        let buttonPressAction1 = SKAction.group([buttonScale1])
+        let buttonPressAction2 = SKAction.group([buttonScale2])
+        let inverseButtonPressAction1 = SKAction.group([inverseButtonScale1])
+        let inverseButtonPressAction2 = SKAction.group([inverseButtonScale2])
         
         if isReversed {
-            buttonSprite.run(inverseButtonPressAction)
+            buttonSprite.run(inverseButtonPressAction1, completion: {buttonSprite.run(inverseButtonPressAction2)})
         }
         else {
-            buttonSprite.run(buttonPressAction)
+            buttonSprite.run(buttonPressAction1, completion: {buttonSprite.run(buttonPressAction2)})
         }
         
     }
