@@ -28,7 +28,7 @@ class GameScene: SKScene {
     var fighterButton2Pressed = false
     
     
-    // FUNCTIONS
+    // INIT FUNCTIONS
     
     
     override func didMove(to view: SKView) {
@@ -48,6 +48,39 @@ class GameScene: SKScene {
     }
     
     
+    func initTiles() {
+        
+        // Initiate tiles and add them to the tiles array.
+        for _ in 0...80 {
+            let tile = SKSpriteNode()
+            tiles.append(tile)
+        }
+        
+        // Set each tile as a child node of self, with procedurally generated name.
+        for index in 0...80 {
+            if index < 10 {
+                tiles[index] = self.childNode(withName: "tile0\(index)") as! SKSpriteNode
+            } else {
+                tiles[index] = self.childNode(withName: "tile\(index)") as! SKSpriteNode
+            }
+        }
+        
+    }
+    
+    
+    func initButtons() {
+        
+        player1BuilderButton = self.childNode(withName: "player1BuilderButton") as! SKSpriteNode
+        player1FighterButton = self.childNode(withName: "player1FighterButton") as! SKSpriteNode
+        player2BuilderButton = self.childNode(withName: "player2BuilderButton") as! SKSpriteNode
+        player2FighterButton = self.childNode(withName: "player2FighterButton") as! SKSpriteNode
+        
+    }
+
+    
+    // FUNCTIONS
+    
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         for touch in (touches) {
@@ -65,17 +98,21 @@ class GameScene: SKScene {
                         player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
                         animateButtonPress(buttonSprite: player1BuilderButton, isReversed: true)
                         animateTilePlacement(tile: tiles[tileNum!], isReversed: false)
+                        checkAllTileSurroundings()
                     }
                 }
                 // Orange tile interaction.
                 if builderButton2Pressed == true && name.substring(to: nameStartIndex) == "tile" {
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
                     let tileNum = Int(name.substring(from: nameEndIndex))
-                    tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-orange")
-                    builderButton2Pressed = false
-                    player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-orange")
-                    animateButtonPress(buttonSprite: player2BuilderButton, isReversed: true)
-                    animateTilePlacement(tile: tiles[tileNum!], isReversed: false)
+                    if tileSurrounded(tileNumber: tileNum!, tileColor: "blue") == false {
+                        tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-orange")
+                        builderButton2Pressed = false
+                        player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-orange")
+                        animateButtonPress(buttonSprite: player2BuilderButton, isReversed: true)
+                        animateTilePlacement(tile: tiles[tileNum!], isReversed: false)
+                        checkAllTileSurroundings()
+                    }
                 }
 
                 // Player 1 builder button.
@@ -132,36 +169,6 @@ class GameScene: SKScene {
                 }
             }
         }
-        
-    }
-    
-    
-    func initTiles() {
-        
-        // Initiate tiles and add them to the tiles array.
-        for _ in 0...80 {
-            let tile = SKSpriteNode()
-            tiles.append(tile)
-        }
-        
-        // Set each tile as a child node of self, with procedurally generated name.
-        for index in 0...80 {
-            if index < 10 {
-                tiles[index] = self.childNode(withName: "tile0\(index)") as! SKSpriteNode
-            } else {
-                tiles[index] = self.childNode(withName: "tile\(index)") as! SKSpriteNode
-            }
-        }
-        
-    }
-    
-    
-    func initButtons() {
-        
-        player1BuilderButton = self.childNode(withName: "player1BuilderButton") as! SKSpriteNode
-        player1FighterButton = self.childNode(withName: "player1FighterButton") as! SKSpriteNode
-        player2BuilderButton = self.childNode(withName: "player2BuilderButton") as! SKSpriteNode
-        player2FighterButton = self.childNode(withName: "player2FighterButton") as! SKSpriteNode
         
     }
     
@@ -262,6 +269,22 @@ class GameScene: SKScene {
         }
         else {
             return false
+        }
+        
+    }
+    
+    
+    func checkAllTileSurroundings() {
+        
+        var currentPos = 0
+        for tile in tiles {
+            if tile.texture!.name == "tile-building-blue" && tileSurrounded(tileNumber: currentPos, tileColor: "orange") {
+                tile.texture = SKTexture(imageNamed: "tile-empty")
+            }
+            if tile.texture!.name == "tile-building-orange" && tileSurrounded(tileNumber: currentPos, tileColor: "blue") {
+                tile.texture = SKTexture(imageNamed: "tile-empty")
+            }
+            currentPos += 1
         }
         
     }
