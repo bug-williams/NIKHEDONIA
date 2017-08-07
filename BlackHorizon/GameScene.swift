@@ -13,7 +13,7 @@ class GameScene: SKScene {
     var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     
-    var tiles:[SKSpriteNode] = [] // Array containing all tiles in the board/grid.
+    var tiles:[SKSpriteNode] = [] // Array containing all tiles in the grid.
     
     // Player conrol buttons.
     var player1BuilderButton = SKSpriteNode()
@@ -92,29 +92,24 @@ class GameScene: SKScene {
                 if builderButton1Pressed == true && name.substring(to: nameStartIndex) == "tile" {
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
                     let tileNum = Int(name.substring(from: nameEndIndex))
-                    if tileSurrounded(tileNumber: tileNum!, tileColor: "orange") == false {
-                        tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-blue")
-                        builderButton1Pressed = false
-                        player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
-                        animateButtonPress(buttonSprite: player1BuilderButton, isReversed: true)
-                        animateTilePlacement(tile: tiles[tileNum!], isReversed: false)
-                        checkAllTileSurroundings()
-                    }
+                    tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-blue")
+                    builderButton1Pressed = false
+                    player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
+                    animateButtonPress(buttonSprite: player1BuilderButton, isReversed: true)
+                    animateTilePlacement(tile: tiles[tileNum!], isReversed: false)
+                    removeDeadTiles()
                 }
                 // Orange tile interaction.
                 if builderButton2Pressed == true && name.substring(to: nameStartIndex) == "tile" {
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
                     let tileNum = Int(name.substring(from: nameEndIndex))
-                    if tileSurrounded(tileNumber: tileNum!, tileColor: "blue") == false {
-                        tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-orange")
-                        builderButton2Pressed = false
-                        player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-orange")
-                        animateButtonPress(buttonSprite: player2BuilderButton, isReversed: true)
-                        animateTilePlacement(tile: tiles[tileNum!], isReversed: false)
-                        checkAllTileSurroundings()
-                    }
+                    tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-orange")
+                    builderButton2Pressed = false
+                    player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-orange")
+                    animateButtonPress(buttonSprite: player2BuilderButton, isReversed: true)
+                    animateTilePlacement(tile: tiles[tileNum!], isReversed: false)
+                    removeDeadTiles()
                 }
-
                 // Player 1 builder button.
                 if name == "player1BuilderButton" {
                     if builderButton1Pressed {
@@ -219,75 +214,203 @@ class GameScene: SKScene {
     // TILE MANAGEMENT FUNCTIONS
     
     
-    func tileSurrounded(tileNumber: Int, tileColor: String) -> Bool {
+    func removeDeadTiles() {
         
-        var upIsCovered = false
-        var downIsCovered = false
-        var leftIsCovered = false
-        var rightIsCovered = false
+        var livingTiles:[Int] = []
         
-        if tileColor == "blue" {
-            // Check if tile above is covered.
-            if tiles[tileNumber - 9].texture!.name == "tile-building-blue" {
-                upIsCovered = true
-            }
-            // Check if tile below is covered.
-            if tiles[tileNumber + 9].texture!.name == "tile-building-blue" {
-                downIsCovered = true
-            }
-            // Check if tile left is covered.
-            if tiles[tileNumber - 1].texture!.name == "tile-building-blue" {
-                leftIsCovered = true
-            }
-            // Check if tile right is covered.
-            if tiles[tileNumber + 1].texture!.name == "tile-building-blue" {
-                rightIsCovered = true
+        // Loop to add all living tiles to the livingTiles array:
+		
+		var previousLivingTilesSize = -1
+		while previousLivingTilesSize != livingTiles.count {
+			previousLivingTilesSize = livingTiles.count
+			for index in 0...80 {
+				if canBreatheThroughTile(index: index, livingTiles: livingTiles) {
+					// If the tile is a building of any color next to a living tile.
+					if !livingTiles.contains(index) {
+						livingTiles.append(index)
+					}
+					print(String(index) + ":" + String(describing:livingTiles))
+				}
+			}
+			print(previousLivingTilesSize)
+			print(livingTiles.count)
+		}
+		
+		print("")
+		
+        // Loop to clear all dead tiles:
+		
+        for index in 0...80 {
+            if !livingTiles.contains(index) {
+                tiles[index].texture = SKTexture(imageNamed: "tile-empty")
             }
         }
-        
-        if tileColor == "orange" {
-            // Check if tile above is covered.
-            if tiles[tileNumber - 9].texture!.name == "tile-building-orange" {
-                upIsCovered = true
-            }
-            // Check if tile below is covered.
-            if tiles[tileNumber + 9].texture!.name == "tile-building-orange" {
-                downIsCovered = true
-            }
-            // Check if tile left is covered.
-            if tiles[tileNumber - 1].texture!.name == "tile-building-orange" {
-                leftIsCovered = true
-            }
-            // Check if tile right is covered.
-            if tiles[tileNumber + 1].texture!.name == "tile-building-orange" {
-                rightIsCovered = true
-            }
-        }
-        
-        if upIsCovered && downIsCovered && leftIsCovered && rightIsCovered {
-            return true
-        }
-        else {
-            return false
-        }
-        
+		
     }
-    
-    
-    func checkAllTileSurroundings() {
-        
-        var currentPos = 0
-        for tile in tiles {
-            if tile.texture!.name == "tile-building-blue" && tileSurrounded(tileNumber: currentPos, tileColor: "orange") {
-                tile.texture = SKTexture(imageNamed: "tile-empty")
-            }
-            if tile.texture!.name == "tile-building-orange" && tileSurrounded(tileNumber: currentPos, tileColor: "blue") {
-                tile.texture = SKTexture(imageNamed: "tile-empty")
-            }
-            currentPos += 1
-        }
-        
-    }
-    
-    
+	
+	
+	func getTilePositionType(index: Int) -> String {
+		
+		// Arrays and variables containing the values of the tiles on the edges and corners:
+		
+		let topEdgeTiles = [1, 2, 3, 4, 5, 6, 7]
+		let bottomEdgeTiles = [73, 74, 75, 76, 77, 78, 79]
+		let leftEdgeTiles = [9, 18, 27, 36, 45, 54, 63]
+		let rightEdgeTiles = [17, 26, 35, 44, 53, 63]
+		
+		let topLeftCornerTile = 0
+		let topRightCornerTile = 8
+		let bottomLeftCornerTile = 72
+		let bottomRightCornerTile = 80
+		
+		// Tests to see what directions should be checked:
+		
+		if topEdgeTiles.contains(index) {
+			return "top edge tile"
+		}
+		else if bottomEdgeTiles.contains(index) {
+			return "bottom edge tile"
+		}
+		else if leftEdgeTiles.contains(index) {
+			return "left edge tile"
+		}
+		else if rightEdgeTiles.contains(index) {
+			return "right edge tile"
+		}
+		else if index == topLeftCornerTile {
+			return "top left corner tile"
+		}
+		else if index == topRightCornerTile {
+			return "top right corner tile"
+		}
+		else if index == bottomLeftCornerTile {
+			return "bottom left corner tile"
+		}
+		else if index == bottomRightCornerTile {
+			return "bottom right corner tile"
+		}
+		else {
+			return "normal tile"
+		}
+		
+	}
+	
+	
+	func canBreatheThroughTile(index: Int, livingTiles: [Int]) -> Bool {
+		
+		// Takes the tile at the given index and checks all four directions for living tiles of the same color.
+		
+		// Variable with the indexed tile's building color, and if it is a building.:
+		
+		let currentTileTexture = tiles[index].texture!.name
+		var currentTileIsBuilding = false
+		
+		if currentTileTexture == "tile-building-blue" || currentTileTexture == "tile-building-orange" { currentTileIsBuilding = true }
+		
+		// Variables to store which directions to be checked:
+		
+		var checkAbove = false
+		var checkBelow = false
+		var checkLeft = false
+		var checkRight = false
+		
+		// Set which directions should be checked:
+		
+		if getTilePositionType(index: index) == "top edge tile" {
+			checkBelow = true
+			checkLeft = true
+			checkRight = true
+		}
+		else if getTilePositionType(index: index) == "bottom edge tile"	{
+			checkAbove = true
+			checkLeft = true
+			checkRight = true
+		}
+		else if getTilePositionType(index: index) == "left edge tile" {
+			checkAbove = true
+			checkBelow = true
+			checkRight = true
+		}
+		else if getTilePositionType(index: index) == "right edge tile" {
+			checkAbove = true
+			checkBelow = true
+			checkLeft = true
+		}
+		else if getTilePositionType(index: index) == "top left corner tile" {
+			checkBelow = true
+			checkRight = true
+		}
+		else if getTilePositionType(index: index) == "top right corner tile" {
+			checkBelow = true
+			checkLeft = true
+		}
+		else if getTilePositionType(index: index) == "bottom left corner tile" {
+			checkAbove = true
+			checkRight = true
+		}
+		else if getTilePositionType(index: index) == "bottom right corner tile" {
+			checkAbove = true
+			checkLeft = true
+		}
+		else if getTilePositionType(index: index) == "normal tile" {
+			checkAbove = true
+			checkBelow = true
+			checkLeft = true
+			checkRight = true
+		}
+		
+		// Ensure that the tile being checked is a building:
+		
+		if !currentTileIsBuilding {
+			return false
+		}
+		
+		// Check the set directions:
+		
+		if checkAbove {
+			if tiles[index - 9].texture!.name == "tile-empty" {
+				// If the tile above is blank...
+				return true
+			}
+			else if tiles[index - 9].texture!.name == currentTileTexture && livingTiles.contains(index - 9) {
+				// If the tile above is a building of the same color, and is in the livingTiles array...
+				return true
+			}
+		}
+		if checkBelow {
+			if tiles[index + 9].texture!.name == "tile-empty" {
+				// If the tile below is blank...
+				return true
+			}
+			else if tiles[index + 9].texture!.name == currentTileTexture && livingTiles.contains(index + 9) {
+				// If the tile below is a building of the same color, and is in the livingTiles array...
+				return true
+			}
+		}
+		if checkLeft {
+			if tiles[index - 1].texture!.name == "tile-empty" {
+				// If the tile to the left is blank...
+				return true
+			}
+			else if tiles[index - 1].texture!.name == currentTileTexture && livingTiles.contains(index - 1) {
+				// If the tile to the left is a building of the same color, and is in the livingTiles array...
+				return true
+			}
+		}
+		if checkRight {
+			if tiles[index + 1].texture!.name == "tile-empty" {
+				// If the tile to the right is blank...
+				return true
+			}
+			else if tiles[index + 1].texture!.name == currentTileTexture && livingTiles.contains(index + 1) {
+				// If the tile to the right is a building of the same color, and is in the livingTiles array...
+				return true
+			}
+		}
+		
+		return false // Otherwise, return false.
+		
+	}
+	
+	
 }
