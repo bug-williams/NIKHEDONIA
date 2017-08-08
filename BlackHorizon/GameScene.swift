@@ -182,17 +182,12 @@ class GameScene: SKScene {
         
         let inverseButtonScale1 = SKAction.scale(to: 1.2, duration: animationTime)
         let inverseButtonScale2 = SKAction.scale(to: 1.0, duration: animationTime)
-        
-        let buttonPressAction1 = SKAction.group([buttonScale1])
-        let buttonPressAction2 = SKAction.group([buttonScale2])
-        let inverseButtonPressAction1 = SKAction.group([inverseButtonScale1])
-        let inverseButtonPressAction2 = SKAction.group([inverseButtonScale2])
-        
+		
         if isReversed {
-            buttonSprite.run(inverseButtonPressAction1, completion: {buttonSprite.run(inverseButtonPressAction2)})
+            buttonSprite.run(inverseButtonScale1, completion: {buttonSprite.run(inverseButtonScale2)})
         }
         else {
-            buttonSprite.run(buttonPressAction1, completion: {buttonSprite.run(buttonPressAction2)})
+            buttonSprite.run(buttonScale1, completion: {buttonSprite.run(buttonScale2)})
         }
         
     }
