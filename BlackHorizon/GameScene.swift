@@ -235,14 +235,9 @@ class GameScene: SKScene {
 					if !livingTiles.contains(index) {
 						livingTiles.append(index)
 					}
-					print(String(index) + ":" + String(describing:livingTiles))
 				}
 			}
-			print(previousLivingTilesSize)
-			print(livingTiles.count)
 		}
-		
-		print("")
 		
         // Loop to clear all dead tiles:
 		
