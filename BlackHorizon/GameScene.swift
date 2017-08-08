@@ -16,12 +16,14 @@ class GameScene: SKScene {
     var tiles:[SKSpriteNode] = [] // Array containing all tiles in the grid.
     
     // Player conrol buttons.
+	
     var player1BuilderButton = SKSpriteNode()
     var player1FighterButton = SKSpriteNode()
     var player2BuilderButton = SKSpriteNode()
     var player2FighterButton = SKSpriteNode()
     
     // Booleans telling tiles which button has been pressed.
+	
     var builderButton1Pressed = false
     var builderButton2Pressed = false
     var fighterButton1Pressed = false
@@ -172,12 +174,14 @@ class GameScene: SKScene {
     
     
     func animateButtonPress(buttonSprite: SKSpriteNode, isReversed: Bool) {
+		
+		let animationTime = 0.15
         
-        let buttonScale1 = SKAction.scale(to: 0.6, duration: 0.1)
-        let buttonScale2 = SKAction.scale(to: 0.8, duration: 0.1)
+        let buttonScale1 = SKAction.scale(to: 0.6, duration: animationTime)
+        let buttonScale2 = SKAction.scale(to: 0.8, duration: animationTime)
         
-        let inverseButtonScale1 = SKAction.scale(to: 1.2, duration: 0.1)
-        let inverseButtonScale2 = SKAction.scale(to: 1.0, duration: 0.1)
+        let inverseButtonScale1 = SKAction.scale(to: 1.2, duration: animationTime)
+        let inverseButtonScale2 = SKAction.scale(to: 1.0, duration: animationTime)
         
         let buttonPressAction1 = SKAction.group([buttonScale1])
         let buttonPressAction2 = SKAction.group([buttonScale2])
@@ -195,9 +199,11 @@ class GameScene: SKScene {
     
     
     func animateTilePlacement(tile: SKSpriteNode, isReversed: Bool) {
+		
+		let animationTime = 0.15
         
-        let tileScale = SKAction.scale(to: 1.2, duration: 0.1)
-        let inverseTileScale = SKAction.scale(to: 1.0, duration: 0.1)
+        let tileScale = SKAction.scale(to: 1.2, duration: animationTime)
+        let inverseTileScale = SKAction.scale(to: 1.0, duration: animationTime)
         
         if isReversed {
             tile.run(inverseTileScale)
