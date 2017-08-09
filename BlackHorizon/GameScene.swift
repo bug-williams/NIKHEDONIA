@@ -7,35 +7,43 @@ import GameplayKit
 class GameScene: SKScene {
     
     
-    // GLOBAL VARIABLES
+    /**
+	
+	GLOBAL VARIABLES
+	
+	**/
     
     
-    var entities = [GKEntity]()
+	// Stuff that's nessisary for SpriteKit:
+	var entities = [GKEntity]()
     var graphs = [String : GKGraph]()
     
-    var tiles:[SKSpriteNode] = [] // Array containing all tiles in the grid.
+	// Array of the tiles that make up the board:
+	var tiles:[SKSpriteNode] = []
     
-    // Player conrol buttons.
-	
+	// Player conrol buttons:
     var player1BuilderButton = SKSpriteNode()
     var player1FighterButton = SKSpriteNode()
     var player2BuilderButton = SKSpriteNode()
     var player2FighterButton = SKSpriteNode()
     
-    // Booleans telling tiles which button has been pressed.
-	
+	// Booleans telling tiles which button has been pressed:
     var builderButton1Pressed = false
     var builderButton2Pressed = false
     var fighterButton1Pressed = false
     var fighterButton2Pressed = false
-    
-    
-    // INIT FUNCTIONS
-    
-    
+	
+	
+	/**
+	
+	INITIATION FUNCTIONS
+	Functions used to initiate the scene, view, tiles, and buttons.
+
+	**/
+	
+	
     override func didMove(to view: SKView) {
-        
-        // Called right before the scene is presented, used here to set up the scene's contents.
+	// Called right before the scene is presented, used here to set up the scene's contents.
         
         initTiles()
         initButtons()
@@ -44,21 +52,20 @@ class GameScene: SKScene {
     
     
     override func sceneDidLoad() {
-        
-        // Called immidiately after the scene is loaded into view.
-        
+	// Called immidiately after the scene is loaded into view.
+		
     }
     
     
     func initTiles() {
         
-        // Initiate tiles and add them to the tiles array.
+        // Initiates tiles and add them to the tiles array.
         for _ in 0...80 {
             let tile = SKSpriteNode()
             tiles.append(tile)
         }
         
-        // Set each tile as a child node of self, with procedurally generated name.
+        // Sets each tile as a child node of self, with a procedurally generated name.
         for index in 0...80 {
             if index < 10 {
                 tiles[index] = self.childNode(withName: "tile0\(index)") as! SKSpriteNode
@@ -80,7 +87,12 @@ class GameScene: SKScene {
     }
 
     
-    // FUNCTIONS
+    /**
+	
+	FUNCTIONS
+	This class' regualar functions.
+	
+	**/
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -97,8 +109,7 @@ class GameScene: SKScene {
                     tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-blue")
                     builderButton1Pressed = false
                     player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
-                    animateButtonPress(buttonSprite: player1BuilderButton, isReversed: true)
-                    animateTilePlacement(tile: tiles[tileNum!], isReversed: false)
+                    animateTilePlacement(tile: tiles[tileNum!])
                     removeDeadTiles()
                 }
                 // Orange tile interaction.
@@ -108,8 +119,7 @@ class GameScene: SKScene {
                     tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-orange")
                     builderButton2Pressed = false
                     player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-orange")
-                    animateButtonPress(buttonSprite: player2BuilderButton, isReversed: true)
-                    animateTilePlacement(tile: tiles[tileNum!], isReversed: false)
+                    animateTilePlacement(tile: tiles[tileNum!])
                     removeDeadTiles()
                 }
                 // Player 1 builder button.
@@ -117,12 +127,12 @@ class GameScene: SKScene {
                     if builderButton1Pressed {
                         builderButton1Pressed = false
                         player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
-                        animateButtonPress(buttonSprite: player1BuilderButton, isReversed: true)
+                        animateButtonPress(buttonSprite: player1BuilderButton)
                     }
                     else {
                         builderButton1Pressed = true
                         player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-pressed")
-                        animateButtonPress(buttonSprite: player1BuilderButton, isReversed: false)
+                        animateButtonPress(buttonSprite: player1BuilderButton)
                     }
                 }
                 // Player 1 fighter button.
@@ -130,12 +140,12 @@ class GameScene: SKScene {
                     if fighterButton1Pressed {
                         fighterButton1Pressed = false
                         player1FighterButton.texture = SKTexture(imageNamed: "button-fighter-blue")
-                        animateButtonPress(buttonSprite: player1FighterButton, isReversed: true)
+                        animateButtonPress(buttonSprite: player1FighterButton)
                     }
                     else {
                         fighterButton1Pressed = true
                         player1FighterButton.texture = SKTexture(imageNamed: "button-fighter-pressed")
-                        animateButtonPress(buttonSprite: player1FighterButton, isReversed: false)
+                        animateButtonPress(buttonSprite: player1FighterButton)
                     }
                 }
                 // Player 2 builder button.
@@ -143,12 +153,12 @@ class GameScene: SKScene {
                     if builderButton2Pressed {
                         builderButton2Pressed = false
                         player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-orange")
-                        animateButtonPress(buttonSprite: player2BuilderButton, isReversed: true)
+                        animateButtonPress(buttonSprite: player2BuilderButton)
                     }
                     else {
                         builderButton2Pressed = true
                         player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-pressed")
-                        animateButtonPress(buttonSprite: player2BuilderButton, isReversed: false)
+                        animateButtonPress(buttonSprite: player2BuilderButton)
                     }
                 }
                 // Player 2 fighter button.
@@ -156,71 +166,66 @@ class GameScene: SKScene {
                     if fighterButton2Pressed {
                         fighterButton2Pressed = false
                         player2FighterButton.texture = SKTexture(imageNamed: "button-fighter-orange")
-                        animateButtonPress(buttonSprite: player2FighterButton, isReversed: true)
+                        animateButtonPress(buttonSprite: player2FighterButton)
                     }
                     else {
                         fighterButton2Pressed = true
                         player2FighterButton.texture = SKTexture(imageNamed: "button-fighter-pressed")
-                        animateButtonPress(buttonSprite: player2FighterButton, isReversed: false)
+                        animateButtonPress(buttonSprite: player2FighterButton)
                     }
                 }
             }
         }
         
     }
+	
+	
+	/**
+
+	SPRITE ANIMATIONS
+	These functions handle the animations of buttons, tiles, etc.
+	
+	**/
     
     
-    // SPRITE ANIMATIONS (SKACTIONS)
-    
-    
-    func animateButtonPress(buttonSprite: SKSpriteNode, isReversed: Bool) {
+    func animateButtonPress(buttonSprite: SKSpriteNode) {
 		
-		let animationTime = 0.15
+		let animationTime = 0.13
         
-        let buttonScale1 = SKAction.scale(to: 0.6, duration: animationTime)
-        let buttonScale2 = SKAction.scale(to: 0.8, duration: animationTime)
-        
-        let inverseButtonScale1 = SKAction.scale(to: 1.2, duration: animationTime)
-        let inverseButtonScale2 = SKAction.scale(to: 1.0, duration: animationTime)
+        let buttonScale1 = SKAction.scale(to: 0.8, duration: animationTime)
+        let buttonScale2 = SKAction.scale(to: 1.0, duration: animationTime)
 		
-        if isReversed {
-            buttonSprite.run(inverseButtonScale1, completion: {buttonSprite.run(inverseButtonScale2)})
-        }
-        else {
-            buttonSprite.run(buttonScale1, completion: {buttonSprite.run(buttonScale2)})
-        }
+		buttonSprite.run(buttonScale1, completion: {buttonSprite.run(buttonScale2)})
         
     }
     
     
-    func animateTilePlacement(tile: SKSpriteNode, isReversed: Bool) {
+    func animateTilePlacement(tile: SKSpriteNode) {
 		
-		let animationTime = 0.15
+		let animationTime = 0.13
         
-        let tileScale = SKAction.scale(to: 1.2, duration: animationTime)
-        let inverseTileScale = SKAction.scale(to: 1.0, duration: animationTime)
-        
-        if isReversed {
-            tile.run(inverseTileScale)
-        }
-        else {
-            tile.run(tileScale, completion: {
-                self.animateTilePlacement(tile: tile, isReversed: true)
-            })
-        }
+        let tileScale1 = SKAction.scale(to: 0.8, duration: animationTime)
+        let tileScale2 = SKAction.scale(to: 1.0, duration: animationTime)
+		
+		tile.run(tileScale1, completion: { tile.run(tileScale2) })
         
     }
-    
-    
-    // TILE MANAGEMENT FUNCTIONS
+	
+	
+	/**
+
+	TILE MANAGMENT FUNCTIONS
+	These functions manage the tile system for the game.
+	
+	**/
     
     
     func removeDeadTiles() {
         
-        var livingTiles:[Int] = []
+		// This variable contains all the tiles that are determined to be "living", so that the others can be removed.
+		var livingTiles:[Int] = []
         
         // Loop to add all living tiles to the livingTiles array:
-		
 		var previousLivingTilesSize = -1
 		while previousLivingTilesSize != livingTiles.count {
 			previousLivingTilesSize = livingTiles.count
@@ -235,7 +240,6 @@ class GameScene: SKScene {
 		}
 		
         // Loop to clear all dead tiles:
-		
         for index in 0...80 {
             if !livingTiles.contains(index) {
                 tiles[index].texture = SKTexture(imageNamed: "tile-empty")
@@ -260,7 +264,6 @@ class GameScene: SKScene {
 		let bottomRightCornerTile = 80
 		
 		// Tests to see what directions should be checked:
-		
 		if topEdgeTiles.contains(index) {
 			return "top edge tile"
 		}
@@ -293,25 +296,22 @@ class GameScene: SKScene {
 	
 	
 	func canBreatheThroughTile(index: Int, livingTiles: [Int]) -> Bool {
+	// Takes the tile at the given index and checks all four directions for living tiles of the same color.
 		
-		// Takes the tile at the given index and checks all four directions for living tiles of the same color.
-		
-		// Variable with the indexed tile's building color, and if it is a building.:
-		
+		// Variable with the indexed tile's building color, and if it is a building:
 		let currentTileTexture = tiles[index].texture!.name
-		var currentTileIsBuilding = false
 		
+		// Variable that stores wheather or not the current tile is a building:
+		var currentTileIsBuilding = false
 		if currentTileTexture == "tile-building-blue" || currentTileTexture == "tile-building-orange" { currentTileIsBuilding = true }
 		
 		// Variables to store which directions to be checked:
-		
 		var checkAbove = false
 		var checkBelow = false
 		var checkLeft = false
 		var checkRight = false
 		
 		// Set which directions should be checked:
-		
 		if getTilePositionType(index: index) == "top edge tile" {
 			checkBelow = true
 			checkLeft = true
@@ -356,13 +356,11 @@ class GameScene: SKScene {
 		}
 		
 		// Ensure that the tile being checked is a building:
-		
 		if !currentTileIsBuilding {
 			return false
 		}
 		
 		// Check the set directions:
-		
 		if checkAbove {
 			if tiles[index - 9].texture!.name == "tile-empty" {
 				// If the tile above is blank...
@@ -404,9 +402,12 @@ class GameScene: SKScene {
 			}
 		}
 		
-		return false // Otherwise, return false.
+		// Otherwise, return false.
+		return false
 		
 	}
+	
+	
 	
 	
 }
