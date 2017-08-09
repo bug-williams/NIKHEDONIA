@@ -10,6 +10,7 @@ class GameScene: SKScene {
     /**
 	
 	GLOBAL VARIABLES
+	I think this is pretty self-explanitory.
 	
 	**/
     
@@ -90,7 +91,7 @@ class GameScene: SKScene {
     /**
 	
 	FUNCTIONS
-	This class' regualar functions.
+	This class's standard functions.
 	
 	**/
     
@@ -189,6 +190,7 @@ class GameScene: SKScene {
     
     
     func animateButtonPress(buttonSprite: SKSpriteNode) {
+	// This function controlls the animations for button presses.
 		
 		let animationTime = 0.13
         
@@ -201,6 +203,7 @@ class GameScene: SKScene {
     
     
     func animateTilePlacement(tile: SKSpriteNode) {
+	// This function controlls the animations for tile placements.
 		
 		let animationTime = 0.13
         
