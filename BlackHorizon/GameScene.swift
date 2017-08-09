@@ -315,43 +315,36 @@ class GameScene: SKScene {
 		var checkRight = false
 		
 		// Set which directions should be checked:
-		if getTilePositionType(index: index) == "top edge tile" {
+		switch getTilePositionType(index: index) {
+		case "top edge tile":
 			checkBelow = true
 			checkLeft = true
 			checkRight = true
-		}
-		else if getTilePositionType(index: index) == "bottom edge tile"	{
+		case "bottom edge tile":
 			checkAbove = true
 			checkLeft = true
 			checkRight = true
-		}
-		else if getTilePositionType(index: index) == "left edge tile" {
+		case "left edge tile":
 			checkAbove = true
 			checkBelow = true
 			checkRight = true
-		}
-		else if getTilePositionType(index: index) == "right edge tile" {
+		case "right edge tile":
 			checkAbove = true
 			checkBelow = true
 			checkLeft = true
-		}
-		else if getTilePositionType(index: index) == "top left corner tile" {
+		case "top left corner tile":
 			checkBelow = true
 			checkRight = true
-		}
-		else if getTilePositionType(index: index) == "top right corner tile" {
+		case "top right corner tile":
 			checkBelow = true
 			checkLeft = true
-		}
-		else if getTilePositionType(index: index) == "bottom left corner tile" {
+		case "bottom left corner tile":
 			checkAbove = true
 			checkRight = true
-		}
-		else if getTilePositionType(index: index) == "bottom right corner tile" {
+		case "bottom right corner tile":
 			checkAbove = true
 			checkLeft = true
-		}
-		else if getTilePositionType(index: index) == "normal tile" {
+		default:
 			checkAbove = true
 			checkBelow = true
 			checkLeft = true
