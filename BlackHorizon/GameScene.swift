@@ -107,21 +107,28 @@ class GameScene: SKScene {
                 if builderButton1Pressed == true && name.substring(to: nameStartIndex) == "tile" {
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
                     let tileNum = Int(name.substring(from: nameEndIndex))
-                    tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-blue")
                     builderButton1Pressed = false
                     player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
                     animateTilePlacement(tile: tiles[tileNum!])
-                    removeDeadTiles()
+					for _ in 0...1 {
+					// This repeats twice because sometimes placed tiles would normally be dead but should live becuase they killed other tiles.
+						tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-blue")
+						removeDeadTiles()
+					}
                 }
                 // Orange tile interaction.
                 if builderButton2Pressed == true && name.substring(to: nameStartIndex) == "tile" {
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
                     let tileNum = Int(name.substring(from: nameEndIndex))
-                    tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-orange")
                     builderButton2Pressed = false
-                    player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-orange")
+					player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-orange")
                     animateTilePlacement(tile: tiles[tileNum!])
                     removeDeadTiles()
+					for _ in 0...1 {
+					// This repeats twice because sometimes placed tiles would normally be dead but should live becuase they killed other tiles.
+						tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-orange")
+						removeDeadTiles()
+					}
                 }
                 // Player 1 builder button.
                 if name == "player1BuilderButton" {
@@ -197,7 +204,7 @@ class GameScene: SKScene {
         let buttonScale1 = SKAction.scale(to: 0.8, duration: animationTime)
         let buttonScale2 = SKAction.scale(to: 1.0, duration: animationTime)
 		
-		buttonSprite.run(buttonScale1, completion: {buttonSprite.run(buttonScale2)})
+		buttonSprite.run(buttonScale1, completion: { buttonSprite.run(buttonScale2) })
         
     }
     
