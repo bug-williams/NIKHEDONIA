@@ -107,27 +107,30 @@ class GameScene: SKScene {
                 if builderButton1Pressed == true && name.substring(to: nameStartIndex) == "tile" {
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
                     let tileNum = Int(name.substring(from: nameEndIndex))
-                    builderButton1Pressed = false
-                    player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
-                    animateTilePlacement(tile: tiles[tileNum!])
-					for _ in 0...1 {
-					// This repeats twice because sometimes placed tiles would normally be dead but should live becuase they killed other tiles.
-						tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-blue")
-						removeDeadTiles()
+					if tiles[tileNum!].texture!.name != "tile-building-blue" && tiles[tileNum!].texture!.name != "tile-building-orange" {
+						animateTilePlacement(tile: tiles[tileNum!])
+						for _ in 0...1 {
+							// This repeats twice because sometimes placed tiles would normally be dead but should live becuase they killed other tiles.
+							tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-blue")
+							removeDeadTiles()
+						}
+						builderButton1Pressed = false
+						player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
 					}
                 }
                 // Orange tile interaction.
                 if builderButton2Pressed == true && name.substring(to: nameStartIndex) == "tile" {
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
                     let tileNum = Int(name.substring(from: nameEndIndex))
-                    builderButton2Pressed = false
-					player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-orange")
-                    animateTilePlacement(tile: tiles[tileNum!])
-                    removeDeadTiles()
-					for _ in 0...1 {
-					// This repeats twice because sometimes placed tiles would normally be dead but should live becuase they killed other tiles.
-						tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-orange")
-						removeDeadTiles()
+					if tiles[tileNum!].texture!.name != "tile-building-blue" && tiles[tileNum!].texture!.name != "tile-building-orange" {
+						animateTilePlacement(tile: tiles[tileNum!])
+						for _ in 0...1 {
+							// This repeats twice because sometimes placed tiles would normally be dead but should live becuase they killed other tiles.
+							tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-orange")
+							removeDeadTiles()
+						}
+						builderButton2Pressed = false
+						player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-orange")
 					}
                 }
                 // Player 1 builder button.
