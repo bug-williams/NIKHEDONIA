@@ -12,7 +12,7 @@ class GameScene: SKScene {
 	GLOBAL VARIABLES
 	I think this is pretty self-explanitory.
 	
-	**/
+	*/
     
     
 	// Stuff that's nessisary for SpriteKit:
@@ -21,12 +21,26 @@ class GameScene: SKScene {
     
 	// Array of the tiles that make up the board:
 	var tiles:[SKSpriteNode] = []
+	
+	// Variable that holds the number of turns that have been taken:
+	var numberOfTurnsTaken = 1
+	
+	// Custom colors:
+	var default_p1Active = UIColor(red: 0.40, green: 0.84, blue: 0.82, alpha: 1.00)
+	var default_p2Active = UIColor(red: 0.99, green: 0.47, blue: 0.33, alpha: 1.00)
+	var default_inactive = UIColor(red: 0.18, green: 0.23, blue: 0.24, alpha: 1.00)
     
-	// Player conrol buttons:
+	// Player buttons:
     var player1BuilderButton = SKSpriteNode()
     var player1FighterButton = SKSpriteNode()
     var player2BuilderButton = SKSpriteNode()
     var player2FighterButton = SKSpriteNode()
+	
+	// Player labels:
+	var player1TitleLabel = SKLabelNode()
+	var player2TitleLabel = SKLabelNode()
+	var player1TurnLabel = SKLabelNode()
+	var player2TurnLabel = SKLabelNode()
     
 	// Booleans telling tiles which button has been pressed:
     var builderButton1Pressed = false
@@ -40,14 +54,15 @@ class GameScene: SKScene {
 	INITIATION FUNCTIONS
 	Functions used to initiate the scene, view, tiles, and buttons.
 
-	**/
+	*/
 	
 	
     override func didMove(to view: SKView) {
 	// Called right before the scene is presented, used here to set up the scene's contents.
-        
-        initTiles()
+		
+		initTiles()
         initButtons()
+		updatePlayersUI()
         
     }
     
@@ -79,6 +94,7 @@ class GameScene: SKScene {
     
     
     func initButtons() {
+	// This function initiates all the buttons.
         
         player1BuilderButton = self.childNode(withName: "player1BuilderButton") as! SKSpriteNode
         player1FighterButton = self.childNode(withName: "player1FighterButton") as! SKSpriteNode
@@ -86,6 +102,20 @@ class GameScene: SKScene {
         player2FighterButton = self.childNode(withName: "player2FighterButton") as! SKSpriteNode
         
     }
+	
+	
+	func initUIElements() {
+	// This function initiates all the UI elements for the game scene, to make sure they're displayed correctly.
+		
+		// Player title labels:
+		player1TitleLabel = self.childNode(withName: "player1TitleLabel") as! SKLabelNode
+		player2TitleLabel = self.childNode(withName: "player2TitleLabel") as! SKLabelNode
+		
+		// Player turn labels:
+		player1TurnLabel = self.childNode(withName: "player1TurnLabel") as! SKLabelNode
+		player2TurnLabel = self.childNode(withName: "player2TurnLabel") as! SKLabelNode
+		
+	}
 
     
     /**
@@ -93,7 +123,16 @@ class GameScene: SKScene {
 	FUNCTIONS
 	This class's standard functions.
 	
-	**/
+	*/
+	
+	
+	func gameTick() {
+	// This function is designed to run after every player action in game, and controlls turns.
+		
+		numberOfTurnsTaken += 1
+		updatePlayersUI()
+		
+	}
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -105,6 +144,7 @@ class GameScene: SKScene {
                 let nameStartIndex = name.index(name.endIndex, offsetBy: -2)
                 // Blue tile interaction.
                 if builderButton1Pressed == true && name.substring(to: nameStartIndex) == "tile" {
+				// If player 1's builder button is pressed and the thing that was tapped was a tile...
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
                     let tileNum = Int(name.substring(from: nameEndIndex))
 					if tiles[tileNum!].texture!.name != "tile-building-blue" && tiles[tileNum!].texture!.name != "tile-building-orange" {
@@ -116,10 +156,12 @@ class GameScene: SKScene {
 						}
 						builderButton1Pressed = false
 						player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
+						gameTick()
 					}
                 }
                 // Orange tile interaction.
                 if builderButton2Pressed == true && name.substring(to: nameStartIndex) == "tile" {
+				// If player 2's builder button is pressed and the thing that was tapped was a tile...
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
                     let tileNum = Int(name.substring(from: nameEndIndex))
 					if tiles[tileNum!].texture!.name != "tile-building-blue" && tiles[tileNum!].texture!.name != "tile-building-orange" {
@@ -131,11 +173,12 @@ class GameScene: SKScene {
 						}
 						builderButton2Pressed = false
 						player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-orange")
+						gameTick()
 					}
                 }
                 // Player 1 builder button.
                 if name == "player1BuilderButton" {
-                    if builderButton1Pressed {
+                    if builderButton1Pressed && getCurrentTurn() == "p1" {
                         builderButton1Pressed = false
                         player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
                         animateButtonPress(buttonSprite: player1BuilderButton)
@@ -147,7 +190,7 @@ class GameScene: SKScene {
                     }
                 }
                 // Player 1 fighter button.
-                if name == "player1FighterButton" {
+                if name == "player1FighterButton" && getCurrentTurn() == "p1" {
                     if fighterButton1Pressed {
                         fighterButton1Pressed = false
                         player1FighterButton.texture = SKTexture(imageNamed: "button-fighter-blue")
@@ -160,7 +203,7 @@ class GameScene: SKScene {
                     }
                 }
                 // Player 2 builder button.
-                if name == "player2BuilderButton" {
+                if name == "player2BuilderButton" && getCurrentTurn() == "p2" {
                     if builderButton2Pressed {
                         builderButton2Pressed = false
                         player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-orange")
@@ -173,7 +216,7 @@ class GameScene: SKScene {
                     }
                 }
                 // Player 2 fighter button.
-                if name == "player2FighterButton" {
+                if name == "player2FighterButton" && getCurrentTurn() == "p2" {
                     if fighterButton2Pressed {
                         fighterButton2Pressed = false
                         player2FighterButton.texture = SKTexture(imageNamed: "button-fighter-orange")
@@ -196,7 +239,7 @@ class GameScene: SKScene {
 	SPRITE ANIMATIONS
 	These functions handle the animations of buttons, tiles, etc.
 	
-	**/
+	*/
     
     
     func animateButtonPress(buttonSprite: SKSpriteNode) {
@@ -226,11 +269,61 @@ class GameScene: SKScene {
 	
 	
 	/**
+	
+	TURN SYSTEM FUNCTIONS
+	These are functions pertaining to the current turn system.
+	
+	*/
+	
+	
+	func getCurrentTurn() -> String {
+	// Retuns "p1" if it's player one's turn, and "p2" if it's player two's turn.
+		
+		if numberOfTurnsTaken % 2 == 0 {
+			// If the turn number is even...
+			return "p2"
+		}
+		else {
+			// If the number of turns is odd...
+			return "p1"
+		}
+		
+	}
+	
+	
+	func updatePlayersUI() {
+	// This function updates each player's buttons and labels to reflect who's turn it is.
+		
+		// Hide everything.
+		// TODO: Fix the fact that the player turn labels won't show or hide.
+		player1TurnLabel.isHidden = true
+		player2TurnLabel.isHidden = true
+		player1BuilderButton.isHidden = true
+		player1FighterButton.isHidden = true
+		player2BuilderButton.isHidden = true
+		player2FighterButton.isHidden = true
+		
+		// Show what's needed.
+		if getCurrentTurn() == "p1" {
+			player1TurnLabel.isHidden = false
+			player1BuilderButton.isHidden = false
+			player1FighterButton.isHidden = false
+		}
+		else if getCurrentTurn() == "p2" {
+			player2TurnLabel.isHidden = false
+			player2BuilderButton.isHidden = false
+			player2FighterButton.isHidden = false
+		}
+	
+	}
+	
+	
+	/**
 
 	TILE MANAGMENT FUNCTIONS
-	These functions manage the tile system for the game.
+	These functions manage the tile/grid/board system for the game.
 	
-	**/
+	*/
     
     
     func removeDeadTiles() {
