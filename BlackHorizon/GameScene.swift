@@ -70,6 +70,8 @@ class GameScene: SKScene {
     override func sceneDidLoad() {
 	// Called immidiately after the scene is loaded into view.
 		
+		player1TurnLabel.isHidden = true
+		
     }
     
     
