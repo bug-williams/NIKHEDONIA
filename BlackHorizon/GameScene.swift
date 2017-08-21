@@ -270,6 +270,20 @@ class GameScene: SKScene {
     }
 	
 	
+	func animateLabelWiggle(label: SKLabelNode) {
+	// This function controlls the animations for turn labels when they appear.
+		
+		let animationTime = 0.6
+		
+		let labelWiggle1 = SKAction.rotate(byAngle: 0.02, duration: animationTime)
+		let labelWiggle2 = SKAction.rotate(byAngle: -0.04, duration: animationTime)
+		let labelWiggle3 = SKAction.rotate(byAngle: 0.02, duration: animationTime)
+		
+		label.run(labelWiggle1, completion: { label.run(labelWiggle2, completion: { label.run(labelWiggle3) }) })
+		
+	}
+	
+	
 	/**
 	
 	TURN SYSTEM FUNCTIONS
@@ -316,6 +330,10 @@ class GameScene: SKScene {
 			player2BuilderButton.isHidden = false
 			player2FighterButton.isHidden = false
 		}
+		
+		// Animate.
+		animateLabelWiggle(label: player1TurnLabel)
+		animateLabelWiggle(label: player2TurnLabel)
 	
 	}
 	
