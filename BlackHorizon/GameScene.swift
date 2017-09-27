@@ -2,8 +2,6 @@ import SpriteKit
 import GameplayKit
 
 
-
-
 class GameScene: SKScene {
     
     
@@ -116,6 +114,23 @@ class GameScene: SKScene {
 		// Player turn labels:
 		player1TurnLabel = self.childNode(withName: "player1TurnLabel") as! SKLabelNode
 		player2TurnLabel = self.childNode(withName: "player2TurnLabel") as! SKLabelNode
+		
+	}
+	
+	
+	/**
+
+	SETTERS & GETTERS
+	Change and grab this class's values.
+	
+	*/
+	
+	
+    func setTileTexture(tileNumber: Int, texture: SKTexture) {
+	// This function takes a tile number, sets it to a given texture, and animates the tile placement.
+		
+		tiles[tileNumber].texture = texture
+		animateTilePlacement(tile: tiles[tileNumber])
 		
 	}
 
@@ -525,8 +540,6 @@ class GameScene: SKScene {
 		return false
 		
 	}
-	
-	
 	
 	
 }
