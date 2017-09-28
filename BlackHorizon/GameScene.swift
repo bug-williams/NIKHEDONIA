@@ -1,3 +1,4 @@
+
 import SpriteKit
 import GameplayKit
 
@@ -5,12 +6,7 @@ import GameplayKit
 class GameScene: SKScene {
     
     
-    /**
-	
-	GLOBAL VARIABLES
-	I think this is pretty self-explanitory.
-	
-	*/
+	// GLOBAL VARIABLES
     
     
 	/// Stuff that's nessisary for SpriteKit:
@@ -47,17 +43,13 @@ class GameScene: SKScene {
     var fighterButton2Pressed = false
 	
 	
-	/**
-	
-	INITIATION FUNCTIONS
-	Functions used to initiate the scene, view, tiles, and buttons.
+	// INITIATION FUNCTIONS
+	// Functions used to initiate the scene, view, tiles, and buttons.
 
-	*/
 	
 	/// Called right before the scene is presented, used here to set up the scene's contents.
     override func didMove(to view: SKView) {
 	
-		
 		initTiles()
         initButtons()
 		initUIElements()
@@ -68,7 +60,7 @@ class GameScene: SKScene {
     
     /// Called immidiately after the scene is loaded into view.
     override func sceneDidLoad() {
-	
+        
 		
     }
     
@@ -118,12 +110,8 @@ class GameScene: SKScene {
 	}
 	
 	
-//
-//
-//    SETTERS & GETTERS
-//    Change and grab this class's values.
-//
-//
+    // SETTERS & GETTERS
+    // Change and grab this class's values.
 	
 	
     func setTileTexture(tileNumber: Int, texture: SKTexture) {
@@ -134,14 +122,11 @@ class GameScene: SKScene {
 		
 	}
 
+	
+	// FUNCTIONS
+	// This class's standard functions.
+	
     
-    /**
-	
-	FUNCTIONS
-	This class's standard functions.
-	
-	*/
-	
 	/// Designed to run after every player action in game and controls turns.
 	func gameTick() {
 		
@@ -162,7 +147,7 @@ class GameScene: SKScene {
                 if builderButton1Pressed == true && name.substring(to: nameStartIndex) == "tile" {
 				// If player 1's builder button is pressed and the thing that was tapped was a tile...
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
-                    let tileNum = Int(name.substring(from: nameEndIndex))
+                    let tileNum = Int(name[name.startIndex...nameEndIndex])
 					if tiles[tileNum!].texture!.name != "tile-building-blue" && tiles[tileNum!].texture!.name != "tile-building-orange" {
 						animateTilePlacement(tile: tiles[tileNum!])
 						for _ in 0...1 {
@@ -175,7 +160,7 @@ class GameScene: SKScene {
 						gameTick()
 					}
                 }
-                // Orange tile interaction.xz
+                // Orange tile interaction
                 if builderButton2Pressed == true && name.substring(to: nameStartIndex) == "tile" {
 				// If player 2's builder button is pressed and the thing that was tapped was a tile...
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
@@ -286,7 +271,6 @@ class GameScene: SKScene {
 	/// Controlls the animations for turn labels when they appear.
 	func animateLabelWiggle(label: SKLabelNode) {
 	
-		
 		let animationTime = 0.6
 		
 		let labelWiggle1 = SKAction.rotate(byAngle: 0.02, duration: animationTime)
@@ -297,18 +281,14 @@ class GameScene: SKScene {
 		
 	}
 	
-	
-	/**
-	
-	TURN SYSTEM FUNCTIONS
-	These are functions pertaining to the current turn system.
-	
-	*/
+    
+	// TURN SYSTEM FUNCTIONS
+	// These are functions pertaining to the current turn system.
 	
 	
-    /// Obtains the current turn using turn# % 2; If it is odd, it will be player 1's turn, else it is player 2's turn
+    /// Gives the current turn as a string.
     ///
-    /// - Returns: returns a string which is 'p1' or 'p2' dependent on the turn#%2
+    /// - Returns: Returns a string which is either 'p1' or 'p2' depending on the turn.
 	func getCurrentTurn() -> String {
 	
 		if numberOfTurnsTaken % 2 == 0 {
@@ -325,7 +305,6 @@ class GameScene: SKScene {
 	/// Updates each player's buttons and labels to reflect who's turn it is.
 	func updatePlayersUI() {
 	
-		
 		// Hide everything.
 		// TODO: Fix the fact that the player turn labels won't show or hide.
 		player1TurnLabel.isHidden = true
@@ -354,12 +333,9 @@ class GameScene: SKScene {
 	}
 	
 	
-	/**
-
-	TILE MANAGMENT FUNCTIONS
-	These functions manage the tile/grid/board system for the game.
-	
-	*/
+    // TILE MANAGMENT FUNCTIONS
+	// These functions manage the tile/grid/board system for the game.
+    
     
     /// Removes tiles which are no longer in use
     func removeDeadTiles() {
@@ -436,10 +412,10 @@ class GameScene: SKScene {
 		
 	}
 	
+    
 	/// Takes the tile at the given index and checks all four directions for living tiles of the same color.
 	func canBreatheThroughTile(index: Int, livingTiles: [Int]) -> Bool {
 	
-		
 		// Variable with the indexed tile's building color, and if it is a building:
 		let currentTileTexture = tiles[index].texture!.name
 		
