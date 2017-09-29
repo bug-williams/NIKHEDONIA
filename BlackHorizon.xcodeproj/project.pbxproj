@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		79A692021F7DC64C00D3CE21 /* Tiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79A692011F7DC64C00D3CE21 /* Tiles.swift */; };
 		9236C5ED1F2547C900CDF74B /* SKSpriteNode+TextureToString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9236C5EC1F2547C900CDF74B /* SKSpriteNode+TextureToString.swift */; };
 		924AF2F01F09AB0800BCF80F /* SF-Pro-Display-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 924AF2EF1F09AB0300BCF80F /* SF-Pro-Display-Black.otf */; };
 		928A7A101EF76D0000D627A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A7A0F1EF76D0000D627A5 /* AppDelegate.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		79A692011F7DC64C00D3CE21 /* Tiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tiles.swift; sourceTree = "<group>"; };
 		9236C5EC1F2547C900CDF74B /* SKSpriteNode+TextureToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKSpriteNode+TextureToString.swift"; sourceTree = "<group>"; };
 		924AF2EF1F09AB0300BCF80F /* SF-Pro-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Black.otf"; sourceTree = "<group>"; };
 		928A7A0C1EF76D0000D627A5 /* BlackHorizon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackHorizon.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +82,7 @@
 		928A7A0E1EF76D0000D627A5 /* BlackHorizon */ = {
 			isa = PBXGroup;
 			children = (
+				79A692011F7DC64C00D3CE21 /* Tiles.swift */,
 				928A7A0F1EF76D0000D627A5 /* AppDelegate.swift */,
 				928A7A111EF76D0100D627A5 /* GameScene.sks */,
 				928A7A131EF76D0100D627A5 /* Actions.sks */,
@@ -173,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				928A7A161EF76D0100D627A5 /* GameScene.swift in Sources */,
+				79A692021F7DC64C00D3CE21 /* Tiles.swift in Sources */,
 				928A7A181EF76D0100D627A5 /* GameViewController.swift in Sources */,
 				9236C5ED1F2547C900CDF74B /* SKSpriteNode+TextureToString.swift in Sources */,
 				928A7A101EF76D0000D627A5 /* AppDelegate.swift in Sources */,
@@ -318,7 +322,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZYTKCJ322J;
 				INFOPLIST_FILE = BlackHorizon/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.zacharywilliams.BlackHorizon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -334,7 +338,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZYTKCJ322J;
 				INFOPLIST_FILE = BlackHorizon/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.zacharywilliams.BlackHorizon;
 				PRODUCT_NAME = "$(TARGET_NAME)";

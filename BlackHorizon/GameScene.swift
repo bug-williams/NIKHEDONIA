@@ -411,7 +411,6 @@ class GameScene: SKScene {
 		}
 		
 	}
-	
     
 	/// Takes the tile at the given index and checks all four directions for living tiles of the same color.
 	func canBreatheThroughTile(index: Int, livingTiles: [Int]) -> Bool {
