@@ -5,7 +5,7 @@ import SceneKit
 
 
 
-/// Defines variables 
+/// Defines the x and y coordinate for the tiles and provides an image String
 protocol Tile {
 
     // ATTRIBUTES
@@ -23,6 +23,8 @@ protocol Tile {
 
 }
 
+
+/// Basic tile which is a square box without anything occupying the box.
 class BasicTile: Tile {
     
     var x: Int
@@ -50,7 +52,7 @@ class BasicTile: Tile {
 
 
 
-
+/// A defined by a building. Includes the owner of the building now.
 class BuildingTile: Tile {
     
     
@@ -83,6 +85,24 @@ class BuildingTile: Tile {
         self.image = image
         
     }
+}
+
+class SoliderTile: Tile {
+    
+    var x: Int
+    var y: Int
+    var image: String
+    var owner: String
+    
+    init(x: Int, y: Int, image: String, owner: String) {
+        
+        self.owner = owner
+        self.x = x
+        self.y = y
+        self.image = image
+        
+    }
+    
     
     
 }
