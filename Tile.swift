@@ -24,6 +24,8 @@ protocol Tile {
 }
 
 
+
+
 /// Basic tile which is a square box without anything occupying the box.
 class BasicTile: Tile {
     
@@ -49,6 +51,7 @@ class BasicTile: Tile {
     
     
 }
+
 
 
 
@@ -87,6 +90,9 @@ class BuildingTile: Tile {
     }
 }
 
+
+
+
 class SoliderTile: Tile {
     
     var x: Int
@@ -102,6 +108,7 @@ class SoliderTile: Tile {
         self.image = image
         
     }
+    
     
     
     
