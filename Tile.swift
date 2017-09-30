@@ -5,49 +5,43 @@ import SceneKit
 
 
 
-class Tile {
-    
-    
+/// Defines variables 
+protocol Tile {
+
     // ATTRIBUTES
     
-    
     /// The x-coordinate of the tile
-    var xCoordinate:Int
+    var x:Int {get set}
     
     /// The y-coordinate of the tile
-    var yCoordinate:Int
+    var y:Int {get set}
     
     /// The name of the desired image for the tile
-    var image:String
-    
+    var image:String {get set}
     
     // INITIALIZERS
-    
-    
-    init(x:Int, y:Int, image:String) {
-        
-        xCoordinate = x
-        yCoordinate = y
-        
-        self.image = image
-        
-    }
-    
-    
+
 }
-
-
-
 
 class BasicTile: Tile {
     
+    var x: Int
     
-    // INITIALIZERS
+    var y: Int
+    
+    var image: String
     
     
+    /// Initializes the basic tile. image is forced to be "tile-empty"
+    ///
+    /// - Parameters:
+    ///   - x: the xCordinate
+    ///   - y: the yCordinate
     init(x:Int, y:Int) {
         
-        super.init(x: x, y: y, image: "tile-empty")
+        image = "tile-empty"
+        self.x = x
+        self.y = y
         
     }
     
@@ -61,7 +55,11 @@ class BuildingTile: Tile {
     
     
     // ATTRIBUTES
+    var x: Int
     
+    var y: Int
+    
+    var image: String
     
     /// The player that owns the building (1 for player 1, 2 for player 2)
     var owner:Int
@@ -80,7 +78,9 @@ class BuildingTile: Tile {
     init(x:Int, y:Int, image:String, owner:Int) {
         
         self.owner = owner
-        super.init(x: x, y: y, image: image)
+        self.x = x
+        self.y = y
+        self.image = image
         
     }
     
