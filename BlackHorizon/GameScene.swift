@@ -1,7 +1,7 @@
 
 import SpriteKit
 import GameplayKit
-
+import Foundation
 
 class GameScene: SKScene {
     
@@ -113,9 +113,9 @@ class GameScene: SKScene {
     // SETTERS & GETTERS
     // Change and grab this class's values.
 	
-	
+	/// This function takes a tile number, sets it to a given texture, and animates the tile placement.
     func setTileTexture(tileNumber: Int, texture: SKTexture) {
-	// This function takes a tile number, sets it to a given texture, and animates the tile placement.
+
 		
 		tiles[tileNumber].texture = texture
 		animateTilePlacement(tile: tiles[tileNumber])
@@ -144,38 +144,84 @@ class GameScene: SKScene {
             if let name = touchedNode.name {
                 let nameStartIndex = name.index(name.endIndex, offsetBy: -2)
                 // Blue tile interaction.
-                if builderButton1Pressed == true && name.substring(to: nameStartIndex) == "tile" {
+                if builderButton1Pressed == true && name[..<nameStartIndex] == "tile" {
 				// If player 1's builder button is pressed and the thing that was tapped was a tile...
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
-                    let tileNum = Int(name[name.startIndex...nameEndIndex])
-					if tiles[tileNum!].texture!.name != "tile-building-blue" && tiles[tileNum!].texture!.name != "tile-building-orange" {
-						animateTilePlacement(tile: tiles[tileNum!])
-						for _ in 0...1 {
-							// This repeats twice because sometimes placed tiles would normally be dead but should live becuase they killed other tiles.
-							tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-blue")
-							removeDeadTiles()
-						}
-						builderButton1Pressed = false
-						player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
-						gameTick()
-					}
+                    if let tileNum = Int(name[name.startIndex...nameEndIndex]){
+                        if let names = tiles[tileNum].texture?.name {
+                            if names != "tile-building-blue" && names != "tile-building-orange" && names != "button-fighter-orange" && names != "button-fighter-blue" {
+                                animateTilePlacement(tile: tiles[tileNum])
+                                for _ in 0...1 {
+                                    // This repeats twice because sometimes placed tiles would normally be dead but should live becuase they killed other tiles.
+                                    tiles[tileNum].texture = SKTexture(imageNamed: "tile-building-blue")
+                                    removeDeadTiles()
+                                }
+                                builderButton1Pressed = false
+                                player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
+                                gameTick()
+                            }
+                        }
+                    }
                 }
                 // Orange tile interaction
-                if builderButton2Pressed == true && name.substring(to: nameStartIndex) == "tile" {
+                if builderButton2Pressed == true && name[..<nameStartIndex] == "tile" {
 				// If player 2's builder button is pressed and the thing that was tapped was a tile...
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
-                    let tileNum = Int(name.substring(from: nameEndIndex))
-					if tiles[tileNum!].texture!.name != "tile-building-blue" && tiles[tileNum!].texture!.name != "tile-building-orange" {
-						animateTilePlacement(tile: tiles[tileNum!])
-						for _ in 0...1 {
-							// This repeats twice because sometimes placed tiles would normally be dead but should live becuase they killed other tiles.
-							tiles[tileNum!].texture = SKTexture(imageNamed: "tile-building-orange")
-							removeDeadTiles()
-						}
-						builderButton2Pressed = false
-						player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-orange")
-						gameTick()
-					}
+                    if let tileNum = Int(name[nameEndIndex...]) {
+                        if let names = tiles[tileNum].texture?.name {
+                            if names != "tile-building-blue" && names != "tile-building-orange" && names != "button-fighter-orange" && names != "button-fighter-blue" {
+                                animateTilePlacement(tile: tiles[tileNum])
+                                for _ in 0...1 {
+                                    // This repeats twice because sometimes placed tiles would normally be dead but should live becuase they killed other tiles.
+                                    tiles[tileNum].texture = SKTexture(imageNamed: "tile-building-orange")
+                                    removeDeadTiles()
+                                }
+                                builderButton2Pressed = false
+                                player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-orange")
+                                gameTick()
+                            }
+                        }
+                    }
+                }
+                // Blue Fighter Tile
+                if fighterButton1Pressed == true && name[..<nameStartIndex] == "tile" {
+                    // If player 1's fighter button is pressed and the thing that was tapped was a tile...
+                    let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
+                    if let tileNum = Int(name[nameEndIndex...]) {
+                        if let names = tiles[tileNum].texture?.name {
+                            if names != "tile-building-blue" && names != "tile-building-orange" && names != "button-fighter-orange" && names != "button-fighter-blue" {
+                                animateTilePlacement(tile: tiles[tileNum])
+                                for _ in 0...1 {
+                                    // This repeats twice because sometimes placed tiles would normally be dead but should live becuase they killed other tiles.
+                                    tiles[tileNum].texture = SKTexture(imageNamed: "button-fighter-blue")
+                                    removeDeadTiles()
+                                }
+                                fighterButton1Pressed = false
+                                player2BuilderButton.texture = SKTexture(imageNamed: "button-fighter-pressed")
+                                gameTick()
+                            }
+                        }
+                    }
+                }
+                // Orange Fighter Tile
+                if fighterButton2Pressed == true && name[..<nameStartIndex] == "tile" {
+                    // If player 1's fighter button is pressed and the thing that was tapped was a tile...
+                    let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
+                    if let tileNum = Int(name[nameEndIndex...]){
+                        if let  names = tiles[tileNum].texture?.name {
+                            if names != "tile-building-blue" && names != "tile-building-orange" && names != "button-fighter-orange" && names != "button-fighter-blue" {
+                                animateTilePlacement(tile: tiles[tileNum])
+                                for _ in 0...1 {
+                                    // This repeats twice because sometimes placed tiles would normally be dead but should live becuase they killed other tiles.
+                                    tiles[tileNum].texture = SKTexture(imageNamed: "button-fighter-orange")
+                                    removeDeadTiles()
+                                }
+                                fighterButton1Pressed = false
+                                player2BuilderButton.texture = SKTexture(imageNamed: "button-fighter-orange")
+                                gameTick()
+                            }
+                        }
+                    }
                 }
                 // Player 1 builder button.
                 if name == "player1BuilderButton" {
@@ -186,7 +232,7 @@ class GameScene: SKScene {
                     }
                     else {
                         builderButton1Pressed = true
-                        player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-pressed")
+                        player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
                         animateButtonPress(buttonSprite: player1BuilderButton)
                     }
                 }
@@ -201,6 +247,7 @@ class GameScene: SKScene {
                         fighterButton1Pressed = true
                         player1FighterButton.texture = SKTexture(imageNamed: "button-fighter-pressed")
                         animateButtonPress(buttonSprite: player1FighterButton)
+    
                     }
                 }
                 // Player 2 builder button.
@@ -227,6 +274,7 @@ class GameScene: SKScene {
                         fighterButton2Pressed = true
                         player2FighterButton.texture = SKTexture(imageNamed: "button-fighter-pressed")
                         animateButtonPress(buttonSprite: player2FighterButton)
+                        
                     }
                 }
             }
@@ -367,7 +415,7 @@ class GameScene: SKScene {
     }
 	
 	
-	func getTilePositionType(index: Int) -> String {
+	func getTilePositionType(index: Int) -> TilePositionType {
 		
 		// Arrays and variables containing the values of the tiles on the edges and corners:
 		
@@ -383,35 +431,39 @@ class GameScene: SKScene {
 		
 		// Tests to see what directions should be checked:
 		if topEdgeTiles.contains(index) {
-			return "top edge tile"
+			return .topEdge
 		}
 		else if bottomEdgeTiles.contains(index) {
-			return "bottom edge tile"
+			return .bottomEdge
 		}
 		else if leftEdgeTiles.contains(index) {
-			return "left edge tile"
+			return .leftEdge
 		}
 		else if rightEdgeTiles.contains(index) {
-			return "right edge tile"
+			return .rightEdge
 		}
 		else if index == topLeftCornerTile {
-			return "top left corner tile"
+			return .topLeftCorner
 		}
 		else if index == topRightCornerTile {
-			return "top right corner tile"
+			return .topRightCorner
 		}
 		else if index == bottomLeftCornerTile {
-			return "bottom left corner tile"
+			return .bottomLeftCorner
 		}
 		else if index == bottomRightCornerTile {
-			return "bottom right corner tile"
+			return .bottomRightCorner
 		}
 		else {
-			return "normal tile"
+			return .normal
 		}
 		
 	}
-    
+    enum TilePositionType {
+        case topEdge, bottomEdge, leftEdge, rightEdge, topLeftCorner
+        case topRightCorner, bottomLeftCorner, bottomRightCorner, normal
+        
+    }
 	/// Takes the tile at the given index and checks all four directions for living tiles of the same color.
 	func canBreatheThroughTile(index: Int, livingTiles: [Int]) -> Bool {
 	
@@ -430,35 +482,35 @@ class GameScene: SKScene {
 		
 		// Set which directions should be checked:
 		switch getTilePositionType(index: index) {
-		case "top edge tile":
+        case .topEdge:
 			checkBelow = true
 			checkLeft = true
 			checkRight = true
-		case "bottom edge tile":
+		case .bottomEdge:
 			checkAbove = true
 			checkLeft = true
 			checkRight = true
-		case "left edge tile":
+		case .leftEdge:
 			checkAbove = true
 			checkBelow = true
 			checkRight = true
-		case "right edge tile":
+		case .rightEdge:
 			checkAbove = true
 			checkBelow = true
 			checkLeft = true
-		case "top left corner tile":
+		case .topLeftCorner:
 			checkBelow = true
 			checkRight = true
-		case "top right corner tile":
+		case .topRightCorner:
 			checkBelow = true
 			checkLeft = true
-		case "bottom left corner tile":
+		case .bottomLeftCorner:
 			checkAbove = true
 			checkRight = true
-		case "bottom right corner tile":
+		case .bottomRightCorner:
 			checkAbove = true
 			checkLeft = true
-		default:
+        case .normal:
 			checkAbove = true
 			checkBelow = true
 			checkLeft = true

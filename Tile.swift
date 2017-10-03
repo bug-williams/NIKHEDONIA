@@ -69,7 +69,7 @@ class BuildingTile: Tile {
     /// The player that owns the building (1 for player 1, 2 for player 2)
     var owner:Int
     
-    
+    var health: Int = 100
     // INITIALIZERS
     
     
@@ -88,6 +88,13 @@ class BuildingTile: Tile {
         self.image = image
         
     }
+    
+    func tickHealth(by damage: Int){
+        
+        self.health -= damage
+        
+    }
+    
 }
 
 
@@ -109,7 +116,9 @@ class SoliderTile: Tile {
         
     }
     
-    
-    
-    
+    func attack(_ building: BuildingTile, by damage: Int) {
+        
+        building.tickHealth(by: damage)
+        
+    }
 }
