@@ -42,12 +42,24 @@ class GameScene: SKScene {
     var fighterButton1Pressed = false
     var fighterButton2Pressed = false
 	
-	
+    //ImageStrings
+    var fighterTileBlue = "button-fighter-blue"
+    var fighterTileOrange = "button-fighter-orange"
+    var builderTileBlue = "tile-building-blue"
+    var builderTileOrange = "tile-building-orange"
+    var fighterButtonBlue = "button-fighter-blue"
+    var fighterButtonOrange = "button-fighter-orange"
+    var builderButtonBlue =  "button-builder-blue"
+    var builderButtonOrange = "button-builder-orange"
+    var pressedBuild = "button-builder-pressed"
+    var pressedFighter = "button-fighter-pressed"
+	var empty = "tile-empty"
 	// INITIATION FUNCTIONS
 	// Functions used to initiate the scene, view, tiles, and buttons.
 
 	
 	/// Called right before the scene is presented, used here to set up the scene's contents.
+    
     override func didMove(to view: SKView) {
 	
 		initTiles()
@@ -149,15 +161,15 @@ class GameScene: SKScene {
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
                     if let tileNum = Int(name[nameEndIndex...]) {
                         if let names = tiles[tileNum].texture?.name {
-                            if names != "tile-building-blue" && names != "tile-building-orange" && names != "button-fighter-orange" && names != "button-fighter-blue" {
+                            if names != builderTileBlue && names != builderTileOrange && names != fighterTileBlue && names != fighterTileOrange {
                                 animateTilePlacement(tile: tiles[tileNum])
                                 for _ in 0...1 {
                                     // This repeats twice because sometimes placed tiles would normally be dead but should live becuase they killed other tiles.
-                                    tiles[tileNum].texture = SKTexture(imageNamed: "tile-building-blue")
+                                    tiles[tileNum].texture = SKTexture(imageNamed: builderTileBlue)
                                     removeDeadTiles()
                                 }
                                 builderButton1Pressed = false
-                                player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
+                                player1BuilderButton.texture = SKTexture(imageNamed: builderButtonBlue)
                                 gameTick()
                             }
                         }
@@ -169,7 +181,7 @@ class GameScene: SKScene {
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
                     if let tileNum = Int(name[nameEndIndex...]) {
                         if let names = tiles[tileNum].texture?.name {
-                            if names != "tile-building-blue" && names != "tile-building-orange" && names != "button-fighter-orange" && names != "button-fighter-blue" {
+                           if names != builderTileBlue && names != builderTileOrange && names != fighterTileBlue && names != fighterTileOrange {
                                 animateTilePlacement(tile: tiles[tileNum])
                                 for _ in 0...1 {
                                     // This repeats twice because sometimes placed tiles would normally be dead but should live becuase they killed other tiles.
@@ -177,7 +189,7 @@ class GameScene: SKScene {
                                     removeDeadTiles()
                                 }
                                 builderButton2Pressed = false
-                                player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-orange")
+                                player2BuilderButton.texture = SKTexture(imageNamed: builderButtonOrange)
                                 gameTick()
                             }
                         }
@@ -189,15 +201,15 @@ class GameScene: SKScene {
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
                     if let tileNum = Int(name[nameEndIndex...]) {
                         if let names = tiles[tileNum].texture?.name {
-                            if names != "tile-building-blue" && names != "tile-building-orange" && names != "button-fighter-orange" && names != "button-fighter-blue" {
+                            if names != builderTileBlue && names != builderTileOrange && names != fighterTileBlue && names != fighterTileOrange {
                                 animateTilePlacement(tile: tiles[tileNum])
                                 for _ in 0...1 {
                                     // This repeats twice because sometimes placed tiles would normally be dead but should live becuase they killed other tiles.
-                                    tiles[tileNum].texture = SKTexture(imageNamed: "button-fighter-blue")
+                                    tiles[tileNum].texture = SKTexture(imageNamed: fighterTileBlue)
                                     removeDeadTiles()
                                 }
                                 fighterButton1Pressed = false
-                                player1FighterButton.texture = SKTexture(imageNamed: "button-fighter-pressed")
+                                player1FighterButton.texture = SKTexture(imageNamed: fighterButtonBlue)
                                 gameTick()
                             }
                         }
@@ -205,19 +217,19 @@ class GameScene: SKScene {
                 }
                 // Orange Fighter Tile
                 if fighterButton2Pressed == true && name[..<nameStartIndex] == "tile" {
-                    // If player 1's fighter button is pressed and the thing that was tapped was a tile...
+                    // If player 2's fighter button is pressed and the thing that was tapped was a tile...
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
-                    if let tileNum = Int(name[nameEndIndex...]){
-                        if let  names = tiles[tileNum].texture?.name {
-                            if names != "tile-building-blue" && names != "tile-building-orange" && names != "button-fighter-orange" && names != "button-fighter-blue" {
+                    if let tileNum = Int(name[nameEndIndex...]) {
+                        if let names = tiles[tileNum].texture?.name {
+                            if names != builderTileBlue && names != builderTileOrange && names != fighterTileBlue && names != fighterTileOrange {
                                 animateTilePlacement(tile: tiles[tileNum])
                                 for _ in 0...1 {
                                     // This repeats twice because sometimes placed tiles would normally be dead but should live becuase they killed other tiles.
-                                    tiles[tileNum].texture = SKTexture(imageNamed: "button-fighter-orange")
+                                    tiles[tileNum].texture = SKTexture(imageNamed: builderTileOrange)
                                     removeDeadTiles()
                                 }
-                                fighterButton2Pressed = false
-                                player2FighterButton.texture = SKTexture(imageNamed: "button-fighter-orange")
+                                fighterButton1Pressed = false
+                                player2FighterButton.texture = SKTexture(imageNamed: fighterButtonOrange)
                                 gameTick()
                             }
                         }
@@ -227,12 +239,17 @@ class GameScene: SKScene {
                 if name == "player1BuilderButton" {
                     if builderButton1Pressed && getCurrentTurn() == "p1" {
                         builderButton1Pressed = false
-                        player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-blue")
+                        player1BuilderButton.texture = SKTexture(imageNamed: builderButtonBlue)
                         animateButtonPress(buttonSprite: player1BuilderButton)
                     }
                     else {
+                        if fighterButton1Pressed == true {
+                            fighterButton1Pressed = false
+                            player1FighterButton.texture = SKTexture(imageNamed: fighterButtonBlue )
+                            animateButtonPress(buttonSprite: player1FighterButton)
+                        }
                         builderButton1Pressed = true
-                        player1BuilderButton.texture = SKTexture(imageNamed: "button-builder-pressed")
+                        player1BuilderButton.texture = SKTexture(imageNamed: pressedBuild)
                         animateButtonPress(buttonSprite: player1BuilderButton)
                     }
                 }
@@ -240,26 +257,36 @@ class GameScene: SKScene {
                 if name == "player1FighterButton" && getCurrentTurn() == "p1" {
                     if fighterButton1Pressed {
                         fighterButton1Pressed = false
-                        player1FighterButton.texture = SKTexture(imageNamed: "button-fighter-blue")
+                        player1FighterButton.texture = SKTexture(imageNamed: fighterButtonBlue)
                         animateButtonPress(buttonSprite: player1FighterButton)
                     }
                     else {
+                        if builderButton1Pressed == true {
+                            builderButton1Pressed = false
+                            player1BuilderButton.texture = SKTexture(imageNamed: builderButtonBlue )
+                            animateButtonPress(buttonSprite: player1BuilderButton)
+                        }
                         fighterButton1Pressed = true
-                        player1FighterButton.texture = SKTexture(imageNamed: "button-fighter-pressed")
+                        player1FighterButton.texture = SKTexture(imageNamed: pressedFighter)
                         animateButtonPress(buttonSprite: player1FighterButton)
-    
+                        
                     }
                 }
                 // Player 2 builder button.
                 if name == "player2BuilderButton" && getCurrentTurn() == "p2" {
                     if builderButton2Pressed {
                         builderButton2Pressed = false
-                        player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-orange")
+                        player2BuilderButton.texture = SKTexture(imageNamed: builderButtonOrange)
                         animateButtonPress(buttonSprite: player2BuilderButton)
                     }
                     else {
+                        if fighterButton2Pressed == true {
+                            fighterButton2Pressed = false
+                            player2FighterButton.texture = SKTexture(imageNamed: fighterButtonOrange )
+                            animateButtonPress(buttonSprite: player2FighterButton)
+                        }
                         builderButton2Pressed = true
-                        player2BuilderButton.texture = SKTexture(imageNamed: "button-builder-pressed")
+                        player2BuilderButton.texture = SKTexture(imageNamed: pressedBuild)
                         animateButtonPress(buttonSprite: player2BuilderButton)
                     }
                 }
@@ -267,19 +294,23 @@ class GameScene: SKScene {
                 if name == "player2FighterButton" && getCurrentTurn() == "p2" {
                     if fighterButton2Pressed {
                         fighterButton2Pressed = false
-                        player2FighterButton.texture = SKTexture(imageNamed: "button-fighter-orange")
+                        player2FighterButton.texture = SKTexture(imageNamed: fighterButtonOrange)
                         animateButtonPress(buttonSprite: player2FighterButton)
                     }
                     else {
+                        if builderButton2Pressed == true {
+                            builderButton2Pressed = false
+                            player2BuilderButton.texture = SKTexture(imageNamed: builderButtonOrange )
+                            animateButtonPress(buttonSprite: player2BuilderButton)
+                        }
                         fighterButton2Pressed = true
-                        player2FighterButton.texture = SKTexture(imageNamed: "button-fighter-pressed")
+                        player2FighterButton.texture = SKTexture(imageNamed: pressedFighter)
                         animateButtonPress(buttonSprite: player2FighterButton)
                         
                     }
                 }
             }
         }
-        
     }
 	
 	
@@ -411,7 +442,6 @@ class GameScene: SKScene {
                 tiles[index].texture = SKTexture(imageNamed: "tile-empty")
             }
         }
-		
     }
 	
 	
@@ -472,7 +502,7 @@ class GameScene: SKScene {
 		
 		// Variable that stores wheather or not the current tile is a building:
 		var currentTileIsBuilding = false
-		if currentTileTexture == "tile-building-blue" || currentTileTexture == "tile-building-orange" { currentTileIsBuilding = true }
+		if currentTileTexture == builderTileBlue || currentTileTexture == builderButtonOrange { currentTileIsBuilding = true }
 		
 		// Variables to store which directions to be checked:
 		var checkAbove = false
@@ -524,7 +554,7 @@ class GameScene: SKScene {
 		
 		// Check the set directions:
 		if checkAbove {
-			if tiles[index - 9].texture!.name == "tile-empty" {
+			if tiles[index - 9].texture!.name == empty {
 				// If the tile above is blank...
 				return true
 			}
@@ -534,7 +564,7 @@ class GameScene: SKScene {
 			}
 		}
 		if checkBelow {
-			if tiles[index + 9].texture!.name == "tile-empty" {
+			if tiles[index + 9].texture!.name == empty {
 				// If the tile below is blank...
 				return true
 			}
@@ -544,7 +574,7 @@ class GameScene: SKScene {
 			}
 		}
 		if checkLeft {
-			if tiles[index - 1].texture!.name == "tile-empty" {
+			if tiles[index - 1].texture!.name == empty {
 				// If the tile to the left is blank...
 				return true
 			}
@@ -554,7 +584,7 @@ class GameScene: SKScene {
 			}
 		}
 		if checkRight {
-			if tiles[index + 1].texture!.name == "tile-empty" {
+			if tiles[index + 1].texture!.name == empty {
 				// If the tile to the right is blank...
 				return true
 			}
