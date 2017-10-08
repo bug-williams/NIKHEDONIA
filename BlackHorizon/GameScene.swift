@@ -181,7 +181,7 @@ class GameScene: SKScene {
                     let nameEndIndex = name.index(name.startIndex, offsetBy: 4)
                     if let tileNum = Int(name[nameEndIndex...]) {
                         if let names = tiles[tileNum].texture?.name {
-                           if names != builderTileBlue && names != builderTileOrange && names != fighterTileBlue && names != fighterTileOrange {
+                           if names != builderTileBlue && names != builderTileOrange && names != fighterTileBlue && names != fighterTileBlue {
                                 animateTilePlacement(tile: tiles[tileNum])
                                 for _ in 0...1 {
                                     // This repeats twice because sometimes placed tiles would normally be dead but should live becuase they killed other tiles.
@@ -498,11 +498,11 @@ class GameScene: SKScene {
 	func canBreatheThroughTile(index: Int, livingTiles: [Int]) -> Bool {
 	
 		// Variable with the indexed tile's building color, and if it is a building:
-		let currentTileTexture = tiles[index].texture!.name
+		let currentTileTexture = tiles[index].texture?.name
 		
 		// Variable that stores wheather or not the current tile is a building:
 		var currentTileIsBuilding = false
-		if currentTileTexture == builderTileBlue || currentTileTexture == builderButtonOrange { currentTileIsBuilding = true }
+		if currentTileTexture == builderTileBlue || currentTileTexture == builderTileOrange { currentTileIsBuilding = true }
 		
 		// Variables to store which directions to be checked:
 		var checkAbove = false
