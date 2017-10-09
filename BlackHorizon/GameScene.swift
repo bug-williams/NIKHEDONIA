@@ -76,9 +76,9 @@ class GameScene: SKScene {
     
     /// Called immidiately after the scene is loaded into view.
     override func sceneDidLoad() {
-        
 		
     }
+    
     
     /// Initiates tiles of the game.
     func initTiles() {
@@ -352,14 +352,14 @@ class GameScene: SKScene {
 	/// Controlls the animations for turn labels when they appear.
 	func animateLabelWiggle(label: SKLabelNode) {
 	
-		let animationTime = 0.6
+		let animationTime = 0.1
 		
-		let labelWiggle1 = SKAction.rotate(byAngle: 0.02, duration: animationTime)
-		let labelWiggle2 = SKAction.rotate(byAngle: -0.04, duration: animationTime)
-		let labelWiggle3 = SKAction.rotate(byAngle: 0.02, duration: animationTime)
+		let labelWiggle1 = SKAction.rotate(byAngle: 0.06, duration: animationTime)
+		let labelWiggle2 = SKAction.rotate(byAngle: -0.12, duration: animationTime)
+		let labelWiggle3 = SKAction.rotate(byAngle: 0.06, duration: animationTime)
 		
 		label.run(labelWiggle1, completion: { label.run(labelWiggle2, completion: { label.run(labelWiggle3) }) })
-		
+        
 	}
 	
     

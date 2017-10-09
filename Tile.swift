@@ -92,7 +92,7 @@ class BuildingTile: Tile {
 
 
 
-class SoliderTile: Tile {
+class SoldierTile: Tile {
     
     
     var x: Int

@@ -18,6 +18,7 @@
 		928A7A1B1EF76D0100D627A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 928A7A191EF76D0100D627A5 /* Main.storyboard */; };
 		928A7A1D1EF76D0100D627A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 928A7A1C1EF76D0100D627A5 /* Assets.xcassets */; };
 		928A7A201EF76D0100D627A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 928A7A1E1EF76D0100D627A5 /* LaunchScreen.storyboard */; };
+		9298D49B1F8BCA5500AA5C94 /* Unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9298D49A1F8BCA5500AA5C94 /* Unit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		928A7A1C1EF76D0100D627A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		928A7A1F1EF76D0100D627A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		928A7A211EF76D0100D627A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9298D49A1F8BCA5500AA5C94 /* Unit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Unit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				928A7A151EF76D0100D627A5 /* GameScene.swift */,
 				928A7A171EF76D0100D627A5 /* GameViewController.swift */,
 				920720D11F7EBDA0007E8BA1 /* Tile.swift */,
+				9298D49A1F8BCA5500AA5C94 /* Unit.swift */,
 				928A7A191EF76D0100D627A5 /* Main.storyboard */,
 				928A7A1C1EF76D0100D627A5 /* Assets.xcassets */,
 				9236C5EE1F2547E300CDF74B /* Extensions */,
@@ -130,7 +133,7 @@
 				TargetAttributes = {
 					928A7A0B1EF76CFF00D627A5 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = 7VWT2JWPX2;
+						DevelopmentTeam = ZYTKCJ322J;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
@@ -178,6 +181,7 @@
 				928A7A161EF76D0100D627A5 /* GameScene.swift in Sources */,
 				928A7A181EF76D0100D627A5 /* GameViewController.swift in Sources */,
 				920720D21F7EBDA0007E8BA1 /* Tile.swift in Sources */,
+				9298D49B1F8BCA5500AA5C94 /* Unit.swift in Sources */,
 				9236C5ED1F2547C900CDF74B /* SKSpriteNode+TextureToString.swift in Sources */,
 				928A7A101EF76D0000D627A5 /* AppDelegate.swift in Sources */,
 			);
@@ -320,7 +324,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7VWT2JWPX2;
+				DEVELOPMENT_TEAM = ZYTKCJ322J;
 				INFOPLIST_FILE = BlackHorizon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -336,7 +340,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7VWT2JWPX2;
+				DEVELOPMENT_TEAM = ZYTKCJ322J;
 				INFOPLIST_FILE = BlackHorizon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
