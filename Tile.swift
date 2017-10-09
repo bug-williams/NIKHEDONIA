@@ -8,6 +8,7 @@ import SceneKit
 /// Defines the x and y coordinate for the tiles and provides an image String
 protocol Tile {
 
+    
     // ATTRIBUTES
     
     /// The x-coordinate of the tile
@@ -18,9 +19,8 @@ protocol Tile {
     
     /// The name of the desired image for the tile
     var image:String {get set}
-    
-    // INITIALIZERS
 
+    
 }
 
 
@@ -29,10 +29,9 @@ protocol Tile {
 /// Basic tile which is a square box without anything occupying the box.
 class BasicTile: Tile {
     
+    
     var x: Int
-    
     var y: Int
-    
     var image: String
     
     
@@ -61,15 +60,13 @@ class BuildingTile: Tile {
     
     // ATTRIBUTES
     var x: Int
-    
     var y: Int
-    
     var image: String
     
     /// The player that owns the building (1 for player 1, 2 for player 2)
     var owner:Int
     
-    var health: Int = 100
+    
     // INITIALIZERS
     
     
@@ -89,11 +86,6 @@ class BuildingTile: Tile {
         
     }
     
-    func tickHealth(by damage: Int){
-        
-        self.health -= damage
-        
-    }
     
 }
 
@@ -102,10 +94,12 @@ class BuildingTile: Tile {
 
 class SoliderTile: Tile {
     
+    
     var x: Int
     var y: Int
     var image: String
     var owner: String
+    
     
     init(x: Int, y: Int, image: String, owner: String) {
         
@@ -116,9 +110,12 @@ class SoliderTile: Tile {
         
     }
     
-    func attack(_ building: BuildingTile, by damage: Int) {
+    
+    func destroy() {
         
-        building.tickHealth(by: damage)
+        // TODO: Make this function "self-distruct" the tile, removing it from the board.
         
     }
+    
+    
 }

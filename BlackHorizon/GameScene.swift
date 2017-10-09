@@ -18,48 +18,52 @@ class GameScene: SKScene {
 	
 	/// Variable that holds the number of turns that have been taken:
 	var numberOfTurnsTaken = 1
-	
-	// Custom colors:
-	var default_p1Active = UIColor(red: 0.40, green: 0.84, blue: 0.82, alpha: 1.00)
-	var default_p2Active = UIColor(red: 0.99, green: 0.47, blue: 0.33, alpha: 1.00)
-	var default_inactive = UIColor(red: 0.18, green: 0.23, blue: 0.24, alpha: 1.00)
     
-	// Player buttons:
+	/// Player buttons:
     var player1BuilderButton = SKSpriteNode()
     var player1FighterButton = SKSpriteNode()
     var player2BuilderButton = SKSpriteNode()
     var player2FighterButton = SKSpriteNode()
 	
-	// Player labels:
+	/// Player labels:
 	var player1TitleLabel = SKLabelNode()
 	var player2TitleLabel = SKLabelNode()
 	var player1TurnLabel = SKLabelNode()
 	var player2TurnLabel = SKLabelNode()
     
-	// Booleans telling tiles which button has been pressed:
+	/// Booleans telling tiles which button has been pressed:
     var builderButton1Pressed = false
     var builderButton2Pressed = false
     var fighterButton1Pressed = false
     var fighterButton2Pressed = false
 	
-    //ImageStrings
-    var fighterTileBlue = "button-fighter-blue"
-    var fighterTileOrange = "button-fighter-orange"
-    var builderTileBlue = "tile-building-blue"
-    var builderTileOrange = "tile-building-orange"
-    var fighterButtonBlue = "button-fighter-blue"
-    var fighterButtonOrange = "button-fighter-orange"
-    var builderButtonBlue =  "button-builder-blue"
-    var builderButtonOrange = "button-builder-orange"
-    var pressedBuild = "button-builder-pressed"
-    var pressedFighter = "button-fighter-pressed"
-	var empty = "tile-empty"
+    /// Image Names
+    let fighterTileBlue = "button-fighter-blue"
+    let fighterTileOrange = "button-fighter-orange"
+    let builderTileBlue = "tile-building-blue"
+    let builderTileOrange = "tile-building-orange"
+    let fighterButtonBlue = "button-fighter-blue"
+    let fighterButtonOrange = "button-fighter-orange"
+    let builderButtonBlue =  "button-builder-blue"
+    let builderButtonOrange = "button-builder-orange"
+    let pressedBuild = "button-builder-pressed"
+    let pressedFighter = "button-fighter-pressed"
+	let empty = "tile-empty"
+    
+    
+    /// Enum for the different possible tile positions.
+    enum TilePositionType {
+        case topEdge, bottomEdge, leftEdge, rightEdge, topLeftCorner
+        case topRightCorner, bottomLeftCorner, bottomRightCorner, normal
+        
+    }
+    
+    
 	// INITIATION FUNCTIONS
 	// Functions used to initiate the scene, view, tiles, and buttons.
 
 	
 	/// Called right before the scene is presented, used here to set up the scene's contents.
-    
     override func didMove(to view: SKView) {
 	
 		initTiles()
@@ -96,9 +100,9 @@ class GameScene: SKScene {
         
     }
     
+    
     /// Initiates all buttons
     func initButtons() {
-	
         
         player1BuilderButton = self.childNode(withName: "player1BuilderButton") as! SKSpriteNode
         player1FighterButton = self.childNode(withName: "player1FighterButton") as! SKSpriteNode
@@ -107,10 +111,10 @@ class GameScene: SKScene {
         
     }
 	
+    
 	/// Initiates all the UI elements for the game scene, to make sure they're displayed correctly.
 	func initUIElements() {
 	
-		
 		// Player title labels:
 		player1TitleLabel = self.childNode(withName: "player1TitleLabel") as! SKLabelNode
 		player2TitleLabel = self.childNode(withName: "player2TitleLabel") as! SKLabelNode
@@ -125,10 +129,10 @@ class GameScene: SKScene {
     // SETTERS & GETTERS
     // Change and grab this class's values.
 	
+    
 	/// This function takes a tile number, sets it to a given texture, and animates the tile placement.
     func setTileTexture(tileNumber: Int, texture: SKTexture) {
 
-		
 		tiles[tileNumber].texture = texture
 		animateTilePlacement(tile: tiles[tileNumber])
 		
@@ -311,20 +315,17 @@ class GameScene: SKScene {
                 }
             }
         }
+        
     }
-	
-	
-	/**
+    
 
-	SPRITE ANIMATIONS
-	These functions handle the animations of buttons, tiles, etc.
-	
-	*/
+	// SPRITE ANIMATIONS
+	// These functions handle the animations of buttons, tiles, etc.
+   
     
     /// Controls the animations for button presses.
     func animateButtonPress(buttonSprite: SKSpriteNode) {
 
-		
 		let animationTime = 0.13
         
         let buttonScale1 = SKAction.scale(to: 0.8, duration: animationTime)
@@ -334,10 +335,10 @@ class GameScene: SKScene {
         
     }
     
+    
     /// Controlls the animations for tile placements.
     func animateTilePlacement(tile: SKSpriteNode) {
 	
-		
 		let animationTime = 0.13
         
         let tileScale1 = SKAction.scale(to: 0.8, duration: animationTime)
@@ -347,6 +348,7 @@ class GameScene: SKScene {
         
     }
 	
+    
 	/// Controlls the animations for turn labels when they appear.
 	func animateLabelWiggle(label: SKLabelNode) {
 	
@@ -381,6 +383,7 @@ class GameScene: SKScene {
 		
 	}
 	
+    
 	/// Updates each player's buttons and labels to reflect who's turn it is.
 	func updatePlayersUI() {
 	
@@ -445,6 +448,11 @@ class GameScene: SKScene {
     }
 	
 	
+    
+    /// Returns the type of position a tile is in (on the edges, the corner, or the middle, etc.)
+    ///
+    /// - Parameter index: The index of the tile being checked.
+    /// - Returns: The type of position the given tile is in.
 	func getTilePositionType(index: Int) -> TilePositionType {
 		
 		// Arrays and variables containing the values of the tiles on the edges and corners:
@@ -487,13 +495,10 @@ class GameScene: SKScene {
 		else {
 			return .normal
 		}
-		
-	}
-    enum TilePositionType {
-        case topEdge, bottomEdge, leftEdge, rightEdge, topLeftCorner
-        case topRightCorner, bottomLeftCorner, bottomRightCorner, normal
         
-    }
+	}
+    
+    
 	/// Takes the tile at the given index and checks all four directions for living tiles of the same color.
 	func canBreatheThroughTile(index: Int, livingTiles: [Int]) -> Bool {
 	
