@@ -19,7 +19,9 @@ protocol Tile {
     
     /// The name of the desired image for the tile
     var image:String {get set}
-
+    
+    /// Time it takes to build a tile based on turns.
+    var buildTime: Int { get }
     
 }
 
@@ -34,6 +36,7 @@ class BasicTile: Tile {
     var y: Int
     var image: String
     
+    var buildTime: Int = 0;
     
     /// Initializes the basic tile. image is forced to be "tile-empty"
     ///
@@ -66,7 +69,7 @@ class BuildingTile: Tile {
     /// The player that owns the building (1 for player 1, 2 for player 2)
     var owner:Int
     
-    
+    var buildTime: Int = 2;
     // INITIALIZERS
     
     
@@ -110,6 +113,7 @@ class SoldierTile: Tile {
         
     }
     
+    var buildTime: Int = 1;
     
     func destroy() {
         
