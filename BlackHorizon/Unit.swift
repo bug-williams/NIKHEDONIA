@@ -27,16 +27,7 @@ class SoldierUnit: Unitable {
         self.y = y
         self.image = image
         self.owner = owner
-        var damage: String
         
-        var health: Int
-        
-        
-    }
-    
-    func defend(from damage: Int) -> Int{
-        
-        self.health -= damage
         
     }
     
