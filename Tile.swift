@@ -92,34 +92,3 @@ class BuildingTile: Tile {
     
 }
 
-
-
-
-class SoldierTile: Tile {
-    
-    
-    var x: Int
-    var y: Int
-    var image: String
-    var owner: String
-    
-    
-    init(x: Int, y: Int, image: String, owner: String) {
-        
-        self.owner = owner
-        self.x = x
-        self.y = y
-        self.image = image
-        
-    }
-    
-    var buildTime: Int = 1;
-    
-    func destroy() {
-        
-        // TODO: Make this function "self-distruct" the tile, removing it from the board.
-        
-    }
-    
-    
-}
