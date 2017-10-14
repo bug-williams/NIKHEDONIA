@@ -4,7 +4,32 @@ import SceneKit
 
 
 
-protocol Unit {
+protocol Unitable {
+    
+    
+    
+}
+
+class SoldierUnit: Unitable {
+
+    
+    //Assumption is that there will be a NEW control view for the soldier units....
+    
+    var x: Int
+    var y: Int
+    var image: String
+    var owner: String
+    var buildTime: Int = 1
+    
+    init(x: Int, y: Int, image: String, owner: String, damage: Int ) {
+        
+        self.x = x
+        self.y = y
+        self.image = image
+        self.owner = owner
+        
+        
+    }
     
     
     
