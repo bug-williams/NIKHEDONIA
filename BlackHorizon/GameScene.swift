@@ -357,8 +357,12 @@ class GameScene: SKScene {
 		let labelWiggle1 = SKAction.rotate(byAngle: 0.06, duration: animationTime)
 		let labelWiggle2 = SKAction.rotate(byAngle: -0.12, duration: animationTime)
 		let labelWiggle3 = SKAction.rotate(byAngle: 0.06, duration: animationTime)
+        
+        let labelScale1 = SKAction.scale(to: 0.8, duration: animationTime)
+        let labelScale2 = SKAction.scale(to: 1.0, duration: animationTime)
 		
 		label.run(labelWiggle1, completion: { label.run(labelWiggle2, completion: { label.run(labelWiggle3) }) })
+        label.run(labelScale1, completion: { label.run(labelScale2) })
         
 	}
 	
