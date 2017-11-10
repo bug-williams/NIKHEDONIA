@@ -1,3 +1,2 @@
-# black-horizon
-A turn-based strategy game for iOS based of the board game 'Go.' Written in Swift.
-Game based on two players. It is going to be a game which features different size boards, two players, networking play, and othe features. The goal of the game is to control the board and you can get a "leg-up" on your oponent by surrounding your oponents buildings. It will destroy their buildings. 
+# NIKHEDONIA
+Written in Swift. A turn-based strategy game for iOS based on the board game 'Go.' The game has two players, and will feature multiple board layouts as well as online play. The goal of the game is to capture as much territory as possible by surrounding enemy structures with your own to destroy them.
