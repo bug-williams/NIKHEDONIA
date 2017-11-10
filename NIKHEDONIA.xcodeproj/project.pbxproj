@@ -25,7 +25,7 @@
 		920720D11F7EBDA0007E8BA1 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Tile.swift; path = ../Tile.swift; sourceTree = "<group>"; };
 		9236C5EC1F2547C900CDF74B /* SKSpriteNode+TextureToString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SKSpriteNode+TextureToString.swift"; sourceTree = "<group>"; };
 		924AF2EF1F09AB0300BCF80F /* SF-Pro-Display-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Display-Black.otf"; sourceTree = "<group>"; };
-		928A7A0C1EF76D0000D627A5 /* BlackHorizon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackHorizon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		928A7A0C1EF76D0000D627A5 /* NIKHEDONIA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NIKHEDONIA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		928A7A0F1EF76D0000D627A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		928A7A111EF76D0100D627A5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		928A7A131EF76D0100D627A5 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
@@ -68,7 +68,7 @@
 		928A7A031EF76CFF00D627A5 = {
 			isa = PBXGroup;
 			children = (
-				928A7A0E1EF76D0000D627A5 /* BlackHorizon */,
+				928A7A0E1EF76D0000D627A5 /* NIKHEDONIA */,
 				928A7A0D1EF76D0000D627A5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -76,12 +76,12 @@
 		928A7A0D1EF76D0000D627A5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				928A7A0C1EF76D0000D627A5 /* BlackHorizon.app */,
+				928A7A0C1EF76D0000D627A5 /* NIKHEDONIA.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		928A7A0E1EF76D0000D627A5 /* BlackHorizon */ = {
+		928A7A0E1EF76D0000D627A5 /* NIKHEDONIA */ = {
 			isa = PBXGroup;
 			children = (
 				928A7A0F1EF76D0000D627A5 /* AppDelegate.swift */,
@@ -98,15 +98,15 @@
 				928A7A1E1EF76D0100D627A5 /* LaunchScreen.storyboard */,
 				928A7A211EF76D0100D627A5 /* Info.plist */,
 			);
-			path = BlackHorizon;
+			path = NIKHEDONIA;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		928A7A0B1EF76CFF00D627A5 /* BlackHorizon */ = {
+		928A7A0B1EF76CFF00D627A5 /* NIKHEDONIA */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 928A7A241EF76D0100D627A5 /* Build configuration list for PBXNativeTarget "BlackHorizon" */;
+			buildConfigurationList = 928A7A241EF76D0100D627A5 /* Build configuration list for PBXNativeTarget "NIKHEDONIA" */;
 			buildPhases = (
 				928A7A081EF76CFF00D627A5 /* Sources */,
 				928A7A091EF76CFF00D627A5 /* Frameworks */,
@@ -116,9 +116,9 @@
 			);
 			dependencies = (
 			);
-			name = BlackHorizon;
+			name = NIKHEDONIA;
 			productName = BlackHorizon;
-			productReference = 928A7A0C1EF76D0000D627A5 /* BlackHorizon.app */;
+			productReference = 928A7A0C1EF76D0000D627A5 /* NIKHEDONIA.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -139,7 +139,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 928A7A071EF76CFF00D627A5 /* Build configuration list for PBXProject "BlackHorizon" */;
+			buildConfigurationList = 928A7A071EF76CFF00D627A5 /* Build configuration list for PBXProject "NIKHEDONIA" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -152,7 +152,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				928A7A0B1EF76CFF00D627A5 /* BlackHorizon */,
+				928A7A0B1EF76CFF00D627A5 /* NIKHEDONIA */,
 			);
 		};
 /* End PBXProject section */
@@ -325,10 +325,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = ZYTKCJ322J;
-				INFOPLIST_FILE = BlackHorizon/Info.plist;
+				INFOPLIST_FILE = NIKHEDONIA/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.zacharywilliams.BlackHorizon;
+				PRODUCT_BUNDLE_IDENTIFIER = me.zacharywilliams.NIKHEDONIA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -344,7 +344,7 @@
 				INFOPLIST_FILE = BlackHorizon/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = me.zacharywilliams.BlackHorizon;
+				PRODUCT_BUNDLE_IDENTIFIER = me.zacharywilliams.NIKHEDONIA;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
 				SWIFT_VERSION = 4.0;
@@ -355,7 +355,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		928A7A071EF76CFF00D627A5 /* Build configuration list for PBXProject "BlackHorizon" */ = {
+		928A7A071EF76CFF00D627A5 /* Build configuration list for PBXProject "NIKHEDONIA" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				928A7A221EF76D0100D627A5 /* Debug */,
@@ -364,7 +364,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		928A7A241EF76D0100D627A5 /* Build configuration list for PBXNativeTarget "BlackHorizon" */ = {
+		928A7A241EF76D0100D627A5 /* Build configuration list for PBXNativeTarget "NIKHEDONIA" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				928A7A251EF76D0100D627A5 /* Debug */,
