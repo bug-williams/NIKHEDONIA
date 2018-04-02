@@ -16,7 +16,7 @@ protocol Unitable {
     
     init ( x: Int, y: Int, image: String, owner: String, damage: Int )
     
-    func attack (_ damage: Int, a: Tile)
+    func attack (_ damage: Int, a: Unit)
     
     
     
@@ -47,7 +47,7 @@ class SoldierUnit: Unitable {
      
     }
     
-    func attack (_ damage: Int, a: Tile) {
+    func attack (_ damage: Int, a: Unit) {
         
         print("Oh")
     }
